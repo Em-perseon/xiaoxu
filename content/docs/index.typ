@@ -8,6 +8,6 @@
 
 这里可以放你的文档、笔记或长期整理的资料。
 
-- 课程笔记
-- 技术文档
-- 阅读记录
+- #link("course-notes/")[课程笔记]
+- #link("technical-docs/")[技术文档]
+- #link("reading-notes/")[阅读记录]
