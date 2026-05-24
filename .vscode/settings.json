@@ -1,0 +1,5 @@
+{
+  "tinymist.exportTarget": "html",
+  "tinymist.typstExtraArgs": ["--features", "html"],
+  "tinymist.rootPath": "${workspaceFolder}"
+}
