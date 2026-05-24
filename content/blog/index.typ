@@ -1,9 +1,9 @@
 #import "../index.typ": template, tufted
 
 #show: template.with(
-  title: "文章",
+  title: "Blog",
 )
 
-= 文章
+= Blog
 
 - #link("hello-world/")[第一篇文章]

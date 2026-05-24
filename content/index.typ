@@ -1,7 +1,7 @@
 #import "../config.typ": template, tufted
 
 #show: template.with(
-  title: "首页",
+  title: "Home",
 )
 
 = Xiaoxu
@@ -13,4 +13,5 @@
 == 最近更新
 
 - #link("/blog/hello-world/")[第一篇文章]
-- #link("/about/")[关于我]
+- #link("/docs/")[Docs]
+- #link("/cv/")[CV]
