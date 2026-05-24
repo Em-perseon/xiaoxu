@@ -14,4 +14,5 @@
 
 - #link("/xiaoxu/blog/hello-world/")[第一篇文章]
 - #link("/xiaoxu/docs/")[Docs]
+- #link("/xiaoxu/essays/")[随笔]
 - #link("/xiaoxu/cv/")[CV]
