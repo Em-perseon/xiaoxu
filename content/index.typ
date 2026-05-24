@@ -12,6 +12,6 @@
 
 == 最近更新
 
-- #link("/blog/hello-world/")[第一篇文章]
-- #link("/docs/")[Docs]
-- #link("/cv/")[CV]
+- #link("/xiaoxu/blog/hello-world/")[第一篇文章]
+- #link("/xiaoxu/docs/")[Docs]
+- #link("/xiaoxu/cv/")[CV]

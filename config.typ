@@ -2,10 +2,15 @@
 
 #let template = tufted.tufted-web.with(
   header-links: (
-    "/": "Home",
-    "/docs/": "Docs",
-    "/blog/": "Blog",
-    "/cv/": "CV",
+    "/xiaoxu/": "Home",
+    "/xiaoxu/docs/": "Docs",
+    "/xiaoxu/blog/": "Blog",
+    "/xiaoxu/cv/": "CV",
   ),
   title: "Xiaoxu",
+  css: (
+    "https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css",
+    "/xiaoxu/assets/tufted.css",
+    "/xiaoxu/assets/custom.css",
+  ),
 )
