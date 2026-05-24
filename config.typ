@@ -2,10 +2,9 @@
 
 #let template = tufted.tufted-web.with(
   header-links: (
-    "/": "Home",
-    "/docs/": "Docs",
-    "/blog/": "Blog",
-    "/cv/": "CV",
+    "/": "首页",
+    "/blog/": "文章",
+    "/about/": "关于",
   ),
-  title: "Tufted",
+  title: "Xiaoxu",
 )
