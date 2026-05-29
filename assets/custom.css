@@ -1,7 +1,7 @@
 .home-layout {
     display: grid;
-    grid-template-columns: minmax(140px, 220px) minmax(0, 38rem);
-    gap: 2.5rem;
+    grid-template-columns: 128px minmax(0, 38rem);
+    gap: 2rem;
     align-items: start;
     max-width: 62rem;
 }
@@ -12,7 +12,8 @@
 
 .home-avatar {
     display: block;
-    width: 100%;
+    width: 128px;
+    height: 128px;
     max-height: none;
     aspect-ratio: 1;
     object-fit: cover;
@@ -52,6 +53,7 @@
     }
 
     .home-avatar {
-        width: min(180px, 60vw);
+        width: 128px;
+        height: 128px;
     }
 }

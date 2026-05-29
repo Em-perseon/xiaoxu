@@ -12,6 +12,8 @@
         class: "home-avatar",
         src: "/xiaoxu/assets/avatar.png",
         alt: "头像",
+        width: "128",
+        height: "128",
       ),
     )
   ]
