@@ -46,6 +46,23 @@
     padding-left: 1.25rem;
 }
 
+.essay-side-image img {
+    max-height: none;
+    border-radius: 4px;
+}
+
+.essay-main-image {
+    width: 55%;
+    margin: 1.4rem 0;
+}
+
+.essay-main-image img {
+    display: block;
+    width: 100%;
+    max-height: none;
+    border-radius: 4px;
+}
+
 @media (max-width: 760px) {
     .home-layout {
         grid-template-columns: 1fr;
@@ -55,5 +72,9 @@
     .home-avatar {
         width: 128px;
         height: 128px;
+    }
+
+    .essay-main-image {
+        width: 100%;
     }
 }
