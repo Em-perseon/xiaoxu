@@ -27,6 +27,10 @@
 
     == 最近更新
 
+    === 2026-06-23
+
+    - #link("/xiaoxu/essays/")[随笔]：#link("/xiaoxu/essays/2026-06-23-throatache/")[生病小记]
+
     === 2026-06-01
 
     - #link("/xiaoxu/essays/")[随笔]：#link("/xiaoxu/essays/2026-06-01-experiment-notes/")[实验小记]
