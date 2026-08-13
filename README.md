@@ -32,7 +32,7 @@ Then open:
 http://127.0.0.1:8080/xiaoxu/
 ```
 
-The preview command uses the same `/xiaoxu/` path prefix as GitHub Pages. Press `Ctrl+C` to stop the server. To use another port, run `make preview PREVIEW_PORT=9000`.
+The preview command uses the same `/xiaoxu/` path prefix as GitHub Pages. It watches Typst files, images, and CSS; saving a file automatically rebuilds the site and refreshes the browser. Press `Ctrl+C` to stop the server. To use another port, run `make preview PREVIEW_PORT=9000`.
 
 ## Deploy
 

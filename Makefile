@@ -21,12 +21,9 @@ assets:
 	@mkdir -p _site/assets
 	@cp -r assets/* _site/assets/
 
-# Serve the site with the same /xiaoxu/ prefix used by GitHub Pages.
-preview: html
-	@mkdir -p _preview
-	@ln -sfn ../_site _preview/xiaoxu
-	@echo "Preview: http://127.0.0.1:$(PREVIEW_PORT)/xiaoxu/"
-	python3 -m http.server $(PREVIEW_PORT) --directory _preview
+# Watch, rebuild, serve, and live-reload with the GitHub Pages path prefix.
+preview:
+	python3 scripts/dev_server.py --port $(PREVIEW_PORT)
 
 # A clean rule to remove generated files
 clean:

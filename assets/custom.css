@@ -107,6 +107,13 @@
     border-radius: 4px;
 }
 
+.essay-portrait img {
+    width: 100%;
+    max-height: 32rem;
+    object-fit: contain;
+    object-position: center top;
+}
+
 .article-meta {
     color: #6b6b6b;
     font-size: 0.95rem;
@@ -283,6 +290,24 @@
     font-size: 0.95rem;
 }
 
+/* Keep multi-paragraph footnotes visually consistent in the right margin. */
+.marginnote {
+    font-size: 0.9rem;
+    line-height: 1.42;
+}
+
+.marginnote p {
+    width: auto;
+    max-width: none;
+    margin: 0.4rem 0 0;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.marginnote p:first-child {
+    margin-top: 0;
+}
+
 article nav[role="doc-toc"] {
     box-sizing: border-box;
     width: 55%;
@@ -326,7 +351,7 @@ article nav[role="doc-toc"] li {
         padding: 0;
         overflow-y: auto;
         border-left: 0;
-        font-size: 0.84rem;
+        font-size: 0.98rem;
         scrollbar-width: thin;
     }
 
