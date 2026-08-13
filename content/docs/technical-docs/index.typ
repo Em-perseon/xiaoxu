@@ -4,8 +4,10 @@
   title: "技术文档",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/docs/"))[← 返回 Docs]
+
 = 技术文档
 
-这里放技术方案、工具使用记录和工程实践文档。
-
-- #link("example/")[示例技术文档]
+#html.elem("nav", attrs: (class: "section-index", aria-label: "技术专题"))[
+  #html.elem("a", attrs: (href: "llm/"))[#html.elem("span")[大语言模型的漫游指南] #html.elem("b")[→]]
+]

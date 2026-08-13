@@ -4,8 +4,11 @@
   title: "课程笔记",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/docs/"))[← 返回 Docs]
+
 = 课程笔记
 
-这里放课程相关的笔记、作业整理和复习材料。
-
-- #link("example/")[示例课程笔记]
+#html.elem("nav", attrs: (class: "section-index", aria-label: "课程专题"))[
+  #html.elem("a", attrs: (href: "advanced-econometrics/"))[#html.elem("span")[高级计量经济学] #html.elem("b")[→]]
+  #html.elem("a", attrs: (href: "advanced-microeconomics/"))[#html.elem("span")[高级微观经济学] #html.elem("b")[→]]
+]

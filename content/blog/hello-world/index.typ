@@ -4,6 +4,8 @@
   title: "第一篇文章",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/blog/"))[← 返回 Blog]
+
 = 第一篇文章
 
 这里写你的第一篇文章。

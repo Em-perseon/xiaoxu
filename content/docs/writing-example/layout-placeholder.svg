@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">文档插图占位示例</title>
+  <desc id="desc">由网格、圆形、连线和文字组成的排版示例图片。</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#d9dde3" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="400" rx="16" fill="#f7f8fa"/>
+  <rect width="640" height="400" rx="16" fill="url(#grid)"/>
+  <circle cx="190" cy="200" r="68" fill="#e5edf9" stroke="#647c9f" stroke-width="3"/>
+  <circle cx="450" cy="200" r="68" fill="#f3e9d5" stroke="#9b7b43" stroke-width="3"/>
+  <path d="M262 200H374" fill="none" stroke="#596473" stroke-width="4"/>
+  <path d="m364 188 16 12-16 12" fill="none" stroke="#596473" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="190" y="207" fill="#30425d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" text-anchor="middle">输入</text>
+  <text x="450" y="207" fill="#614d2d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" text-anchor="middle">输出</text>
+  <text x="320" y="344" fill="#68717d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" text-anchor="middle">图片示例 · 替换为你的内容</text>
+</svg>

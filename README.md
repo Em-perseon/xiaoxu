@@ -11,6 +11,8 @@ The site is built with [Typst](https://typst.app/) and the [Tufted](https://typs
 ```text
 content/index.typ                  Home
 content/docs/index.typ             Docs
+content/docs/technical-docs/       Technical documentation
+content/docs/course-notes/         Course notes
 content/blog/index.typ             Blog index
 content/blog/hello-world/index.typ Blog post
 content/cv/index.typ               CV
@@ -21,15 +23,16 @@ assets/                            CSS and static assets
 ## Local Preview
 
 ```shell
-make html
-python3 -m http.server 8000 --directory _site
+make preview
 ```
 
 Then open:
 
 ```text
-http://127.0.0.1:8000/
+http://127.0.0.1:8080/xiaoxu/
 ```
+
+The preview command uses the same `/xiaoxu/` path prefix as GitHub Pages. Press `Ctrl+C` to stop the server. To use another port, run `make preview PREVIEW_PORT=9000`.
 
 ## Deploy
 

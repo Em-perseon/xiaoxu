@@ -4,6 +4,8 @@
   title: "示例技术文档",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/docs/technical-docs/"))[← 返回技术文档]
+
 = 示例技术文档
 
 这里写技术文档正文。

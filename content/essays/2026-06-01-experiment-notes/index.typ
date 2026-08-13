@@ -4,6 +4,8 @@
   title: "实验小记",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/essays/"))[← 返回 Essays]
+
 = 实验小记
 
 #html.elem("span", attrs: (class: "marginnote essay-side-image"))[

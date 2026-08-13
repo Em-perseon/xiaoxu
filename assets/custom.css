@@ -1,9 +1,9 @@
 .home-layout {
     display: grid;
-    grid-template-columns: 128px minmax(0, 38rem);
-    gap: 2rem;
+    grid-template-columns: 144px minmax(0, 42rem);
+    gap: 2.5rem;
     align-items: start;
-    max-width: 62rem;
+    max-width: 68rem;
 }
 
 .home-aside {
@@ -12,8 +12,8 @@
 
 .home-avatar {
     display: block;
-    width: 128px;
-    height: 128px;
+    width: 144px;
+    height: 144px;
     max-height: none;
     aspect-ratio: 1;
     object-fit: cover;
@@ -35,6 +35,62 @@
     margin-top: 0;
 }
 
+.home-lead {
+    margin: 0.5rem 0 1.75rem;
+    font-size: 1.25rem;
+    line-height: 1.65;
+}
+
+.home-sections {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.home-sections a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 0;
+    color: inherit;
+    background-image: none;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.home-sections a:nth-child(odd) {
+    padding-right: 1.25rem;
+}
+
+.home-sections a:nth-child(even) {
+    padding-left: 1.25rem;
+    border-left: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.home-sections strong {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.home-sections span {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+.home-sections a:hover strong,
+.home-sections a:focus-visible strong {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.home-sections a:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 0.2rem;
+}
+
 .home-main h4 {
     font-size: 1.35rem;
     line-height: 1.2;
@@ -51,6 +107,303 @@
     border-radius: 4px;
 }
 
+.article-meta {
+    color: #6b6b6b;
+    font-size: 0.95rem;
+}
+
+.article-lead {
+    font-size: 1.18rem;
+    line-height: 1.65;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    margin: 0 0 0.75rem;
+    padding: 0.42rem 0.72rem;
+    border: 1px solid rgba(70, 70, 70, 0.28);
+    border-radius: 999px;
+    color: #555;
+    background: transparent;
+    background-image: none;
+    font-size: 0.88rem;
+    line-height: 1;
+    text-decoration: none;
+    transition: color 120ms ease, border-color 120ms ease,
+        transform 120ms ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+    border-color: #222;
+    color: #111;
+    outline: none;
+    transform: translateX(-0.12rem);
+}
+
+.section-index {
+    box-sizing: border-box;
+    width: 55%;
+    margin-top: 1.6rem;
+    border-top: 1px solid rgba(90, 90, 90, 0.32);
+}
+
+.section-index a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.05rem 0.1rem;
+    border-bottom: 1px solid rgba(90, 90, 90, 0.32);
+    color: inherit;
+    background: none;
+    background-image: none;
+    text-decoration: none;
+}
+
+.section-index span {
+    font-size: 1.24rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.section-index b {
+    color: #707070;
+    font-size: 0.84rem;
+    font-weight: 400;
+    line-height: 1.35;
+    white-space: nowrap;
+    transition: color 120ms ease, transform 120ms ease;
+}
+
+.section-index a:hover span,
+.section-index a:focus-visible span {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+}
+
+.section-index a:hover b,
+.section-index a:focus-visible b {
+    color: #111;
+    transform: translateX(0.18rem);
+}
+
+.section-index a:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 0.18rem;
+}
+
+.section-empty {
+    box-sizing: border-box;
+    width: 55%;
+    margin-top: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(90, 90, 90, 0.3);
+    border-bottom: 1px solid rgba(90, 90, 90, 0.3);
+    color: #777;
+    font-size: 0.92rem;
+}
+
+.timeline {
+    position: relative;
+    box-sizing: border-box;
+    width: 55%;
+    margin-top: 2rem;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0.45rem;
+    bottom: 0.45rem;
+    left: 8.2rem;
+    width: 1px;
+    background: rgba(90, 90, 90, 0.35);
+}
+
+.timeline-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 2.4rem;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 2.4rem;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 0.38rem;
+    left: calc(8.2rem - 4px);
+    box-sizing: border-box;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    background: #fffff8;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-item time {
+    padding-top: 0.05rem;
+    color: #666;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.timeline-content,
+.timeline-content h3,
+.timeline-content p {
+    width: auto;
+    max-width: none;
+}
+
+.timeline-content h3 {
+    margin: 0 0 0.45rem;
+    font-size: 1.3rem;
+    line-height: 1.3;
+}
+
+.timeline-content p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.timeline-content .timeline-link {
+    margin-top: 0.45rem;
+    font-size: 0.95rem;
+}
+
+article nav[role="doc-toc"] {
+    box-sizing: border-box;
+    width: 55%;
+    margin: 1.25rem 0 2rem;
+    padding: 0.85rem 1rem;
+    border-left: 2px solid rgba(128, 128, 128, 0.42);
+}
+
+article nav[role="doc-toc"] > h2,
+article nav[role="doc-toc"] > h3,
+article nav[role="doc-toc"] > h4 {
+    margin: 0 0 0.55rem;
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+
+article nav[role="doc-toc"] ul,
+article nav[role="doc-toc"] ol {
+    width: auto;
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+article nav[role="doc-toc"] li {
+    margin: 0.2rem 0;
+}
+
+/* On wide screens, follow the reference blog and keep the table of contents
+   fixed in the unused space to the left of the article. */
+@media (min-width: 1200px) {
+    article nav[role="doc-toc"] {
+        position: fixed;
+        z-index: 2;
+        top: 21vh;
+        left: max(1rem, calc((100vw - 1680px) / 2 + 1rem));
+        width: calc(12.5vw - 2.5rem);
+        min-width: 8rem;
+        max-width: 11rem;
+        max-height: 72vh;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
+        border-left: 0;
+        font-size: 0.84rem;
+        scrollbar-width: thin;
+    }
+
+    article nav[role="doc-toc"] > h2 {
+        display: none;
+    }
+
+    article nav[role="doc-toc"] ol,
+    article nav[role="doc-toc"] ul {
+        width: auto;
+        margin: 0;
+        padding: 0;
+        font-size: inherit;
+        line-height: inherit;
+        list-style: none;
+    }
+
+    article nav[role="doc-toc"] ol ol,
+    article nav[role="doc-toc"] ul ul {
+        margin-left: 0.45rem;
+    }
+
+    article nav[role="doc-toc"] li {
+        margin: 0;
+        line-height: 1.18;
+    }
+
+    article nav[role="doc-toc"] a {
+        display: block;
+        padding: 0.22rem 0.15rem 0.22rem 0.5rem;
+        border-left: 1px solid rgba(70, 70, 70, 0.48);
+        color: #555;
+        font-size: inherit;
+        line-height: 1.25;
+        background-image: none;
+        text-decoration: none;
+        transition: color 120ms ease, border-color 120ms ease;
+    }
+
+    article nav[role="doc-toc"] a:hover,
+    article nav[role="doc-toc"] a:focus-visible {
+        border-left-color: #111;
+        color: #111;
+        outline: none;
+    }
+}
+
+.writing-note {
+    box-sizing: border-box;
+    width: 55%;
+    margin: 1.4rem 0;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid #8a8a8a;
+    background: rgba(128, 128, 128, 0.08);
+}
+
+.writing-note p {
+    width: auto;
+    margin: 0;
+}
+
+.blog-side-figure {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.blog-side-figure img {
+    display: block;
+    width: 100%;
+    max-height: none;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(128, 128, 128, 0.28);
+    border-radius: 6px;
+    background: #fff;
+}
+
 .essay-main-image {
     width: 55%;
     margin: 1.4rem 0;
@@ -61,6 +414,47 @@
     width: 100%;
     max-height: none;
     border-radius: 4px;
+}
+
+/* Article hierarchy follows the quieter, single-column rhythm used by the
+   reference Tufted blog: one page title, then clearly separated sections. */
+article h2 {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+article h3 {
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin-top: 1.6rem;
+    margin-bottom: 0.8rem;
+}
+
+article h4 {
+    font-size: 1.45rem;
+    line-height: 1.3;
+    margin-top: 1.35rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Typst emits display equations as math figures. Keep them inside the main
+   text column and center the rendered formula within that column. */
+figure[role="math"] {
+    box-sizing: border-box;
+    width: 55%;
+    max-width: 55%;
+    margin: 1.25rem 0;
+    padding: 0.1rem 1rem;
+    overflow-x: auto;
+    text-align: center;
+}
+
+figure[role="math"] > svg {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
 }
 
 @media (max-width: 760px) {
@@ -74,7 +468,53 @@
         height: 128px;
     }
 
+    .home-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .home-sections a:nth-child(odd),
+    .home-sections a:nth-child(even) {
+        padding-inline: 0;
+        border-left: 0;
+    }
+
     .essay-main-image {
         width: 100%;
     }
+
+    .writing-note {
+        width: 100%;
+    }
+
+    .section-index,
+    .section-empty,
+    .timeline,
+    article nav[role="doc-toc"] {
+        width: 100%;
+    }
+
+    .timeline::before {
+        left: 0.28rem;
+    }
+
+    .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+        padding-left: 1.6rem;
+    }
+
+    .timeline-item::before {
+        left: 0;
+    }
+
+    .timeline-item time {
+        text-align: left;
+    }
+
+    figure[role="math"] {
+        width: 100%;
+        max-width: 100%;
+        padding-inline: 0;
+    }
+
 }

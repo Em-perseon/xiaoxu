@@ -1,4 +1,5 @@
 _site/
+_preview/
 .DS_Store
 **/.DS_Store
 content/**/*.pdf

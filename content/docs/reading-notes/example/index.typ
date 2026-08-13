@@ -4,6 +4,8 @@
   title: "示例阅读记录",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/docs/reading-notes/"))[← 返回阅读记录]
+
 = 示例阅读记录
 
 这里写阅读记录正文。

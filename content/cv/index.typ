@@ -4,9 +4,9 @@
   title: "CV",
 )
 
-= CV
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/"))[← 返回首页]
 
-这里可以放你的简历。
+= CV
 
 == Education
 

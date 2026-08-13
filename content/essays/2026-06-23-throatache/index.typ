@@ -4,6 +4,8 @@
   title: "生病小记",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/essays/"))[← 返回 Essays]
+
 = 生病小记
 
 

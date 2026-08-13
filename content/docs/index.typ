@@ -4,10 +4,13 @@
   title: "Docs",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/"))[← 返回首页]
+
 = Docs
 
-这里可以放你的文档、笔记或长期整理的资料。
-
-- #link("course-notes/")[课程笔记]
-- #link("technical-docs/")[技术文档]
-- #link("reading-notes/")[阅读记录]
+#html.elem("nav", attrs: (class: "section-index", aria-label: "文档分类"))[
+  #html.elem("a", attrs: (href: "course-notes/"))[#html.elem("span")[课程笔记] #html.elem("b")[→]]
+  #html.elem("a", attrs: (href: "technical-docs/"))[#html.elem("span")[技术文档] #html.elem("b")[→]]
+  #html.elem("a", attrs: (href: "reading-notes/"))[#html.elem("span")[阅读记录] #html.elem("b")[→]]
+  #html.elem("a", attrs: (href: "writing-example/"))[#html.elem("span")[写作示例] #html.elem("b")[→]]
+]

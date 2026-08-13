@@ -4,6 +4,8 @@
   title: "关于",
 )
 
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/"))[← 返回首页]
+
 = 关于我
 
 这里写你的个人介绍。
