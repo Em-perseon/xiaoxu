@@ -13,7 +13,7 @@
     #html.elem("time", attrs: (datetime: "2026-08-13"))[2026 · 08 · 13]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[强化学习专题]
-      #html.elem("p")[整理强化学习基础、DQN、策略梯度与 Actor-Critic，并将原有图示转换成中文正文和数学公式。]
+      #html.elem("p")[整理强化学习基础、DQN、策略梯度与 Actor-Critic。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/reinforcement-learning/")[阅读强化学习入门 →]]
     ]
   ]

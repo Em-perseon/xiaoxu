@@ -13,6 +13,6 @@
   css: (
     "https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css",
     "/xiaoxu/assets/tufted.css",
-    "/xiaoxu/assets/custom.css?v=20260813j",
+    "/xiaoxu/assets/custom.css?v=20260815a",
   ),
 )
