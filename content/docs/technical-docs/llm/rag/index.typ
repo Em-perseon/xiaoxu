@@ -88,7 +88,7 @@ $ P(a | q, D) = sum_(d in D) P_(M_theta)(a | q, d) P_"ret"(d | q, D) $
 === 稠密检索
   稠密段落检索 #footnote[这个的作用是为了找到一个好的q和d的表示]（Dense Passage Retrieval, DPR）使用两个独立的基于 BERT #footnote[
     2026-08-14：不一定是这个Encoder(虽然后面可以知道为什么要训练一个Encoder)Decoder我觉得也行。\
-    Decoder 大模型产生的高维 contextual representation 确实可以拿来构造 RAG embedding,它的 hidden state 语义非常丰富，但这个向量空间不一定是一个好的 retrieval space。] 的编码器—查询编码器$E_(Q)$和段落编码器$E_(P)$—并用对比损失训练，使相关查询-段落对在embedding空间中彼此接近。
+    Decoder 大模型产生的高维 contextual representation (RAG当中的embeddingg都是指contextual representation，而不是普通的token embedding）确实可以拿来构造 RAG embedding,它的 hidden state 语义非常丰富，但这个向量空间不一定是一个好的 retrieval space。] 的编码器—查询编码器$E_(Q)$和段落编码器$E_(P)$—并用对比损失训练，使相关查询-段落对在embedding空间中彼此接近。
 
   在双编码器架构中，查询和段落分别被映射为向量，并通过点积计算相似度：
 
@@ -155,7 +155,16 @@ SPLADE 生成的向量仍然是词表空间中的稀疏向量，因此可以像 
 
 1. *分词。* Tokenizer 将输入文本转换为 $N$ 个 token，例如 `[苹果] [手机] [的] [价格]`。
 2. *上下文编码。* BERT 为每个 token 生成一个 $H$ 维 hidden state，得到 $N times H$ 的 hidden-state 矩阵，其中 $H$ 是模型的 hidden size，例如 768。
-3. *词表投影。* MLM Head #footnote[Masked Language Modeling Head，掩码语言模型预测头]将每个 token 位置分别投影到大小为 $abs(V)$ 的完整词表，因此得到 $N times abs(V)$ 的 logit 矩阵。记第 $i$ 个 token 位置对第 $j$ 个词表词项产生的 logit 为 $z_(i,j)$。
+3. *词表投影。* MLM Head #footnote[Masked Language Modeling Head，掩码语言模型预测头]将每个 token 位置分别投影到大小为 $abs(V)$ 的完整词表#footnote[
+  “完整词汇空间”指 Tokenizer 预先定义的全部 token，而不是当前句子中出现的几个词。假设 $abs(V)=30,522$，就可以把它想成 30,522 个位置固定的槽位：第一个位置永远对应词表中的第一个 token，第二个位置永远对应第二个 token，以此类推。
+  #linebreak()#linebreak()
+  输入端有 Token Embedding Matrix $E in RR^(abs(V) times 768)$。某个 Token ID 为 $k$ 时，embedding lookup 只取 $E$ 的第 $k$ 行，得到 $e_k in RR^768$。
+  #linebreak()#linebreak()
+  输出端则把 MLM Head 产生的 $tilde(h)_i in RR^768$ 与词表中的全部 30,522 行同时比较。若采用权重共享，可写为 $z_i = E tilde(h)_i + b in RR^abs(V)$。所以 $z_i$ 有 30,522 个 logit，每个位置表示对应词表 token 的预测分数，例如“苹果”为 8.7、“米饭”为 8.2、“汽车”为 -1.7。
+  #linebreak()#linebreak()
+  “权重共享”不是说输入 embedding 和输出 logits 是同一种向量，而是说输入查表和输出打分复用了同一个参数矩阵 $E$：输入时按 Token ID 取其中一行，输出时则用 hidden state 与它的所有行计算分数。
+]，因此得到 $N times abs(V)$ 的 logit 矩阵。记第 $i$ 个 token 位置对第 $j$ 个词表词项产生的 logit 为 $z_(i,j)$。
+
 4. *非负激活。* 对每个 logit 进行变换：
 
 $ a_(i,j) = log(1 + op("ReLU")(z_(i,j))) $

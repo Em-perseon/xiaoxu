@@ -673,17 +673,45 @@ article h2 {
 }
 
 article h3 {
-    font-size: 2.1rem;
+    font-size: 2rem;
     line-height: 1.2;
-    margin-top: 1.6rem;
-    margin-bottom: 0.8rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
 }
 
 article h4 {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     line-height: 1.3;
-    margin-top: 1.35rem;
-    margin-bottom: 0.6rem;
+    margin-top: 2.1rem;
+    margin-bottom: 0.7rem;
+}
+
+/* Typst's == and === headings become h3 and h4 in the HTML export.
+   Give chapter headings a rule, while subsection headings use a short bar. */
+article > section > h3 {
+    box-sizing: border-box;
+    width: 55%;
+    max-width: 55%;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(55, 55, 55, 0.28);
+}
+
+article > section > h3::before {
+    display: inline-block;
+    width: 0.36rem;
+    height: 0.36rem;
+    margin: 0 0.7rem 0.2rem 0.08rem;
+    border: 1px solid rgba(45, 45, 45, 0.68);
+    content: "";
+    transform: rotate(45deg);
+}
+
+article > section > h4 {
+    box-sizing: border-box;
+    width: 55%;
+    max-width: 55%;
+    padding-left: 0.75rem;
+    border-left: 2px solid rgba(75, 75, 75, 0.48);
 }
 
 /* Typst emits display equations as math figures. Keep them inside the main
@@ -763,6 +791,12 @@ figure[role="math"] > svg {
         width: 100%;
         max-width: 100%;
         padding-inline: 0;
+    }
+
+    article > section > h3,
+    article > section > h4 {
+        width: 100%;
+        max-width: 100%;
     }
 
     .colbert-side-note {

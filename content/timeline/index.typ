@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-08-15"))[2026 · 08 · 15]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[检索增强生成笔记]
+      #html.elem("p")[补充 SPLADE、SPLADEv2 与 ColBERT 的原理、公式和示例，完善完整词汇空间与权重共享的页边注，并增强文档标题层级。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/rag/")[阅读 RAG 笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-13"))[2026 · 08 · 13]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[强化学习专题]
