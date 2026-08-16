@@ -414,7 +414,9 @@ article nav[role="doc-toc"] li {
 }
 
 .rrf-example,
-.graph-rag-guide {
+.graph-rag-guide,
+.refrag-agent-box,
+.router-policy-box {
     box-sizing: border-box;
     width: 55%;
     margin: 1.4rem 0;
@@ -427,23 +429,32 @@ article nav[role="doc-toc"] li {
 .rrf-example p,
 .rrf-example figure,
 .graph-rag-guide p,
-.graph-rag-guide ul {
+.graph-rag-guide ul,
+.refrag-agent-box p,
+.router-policy-box p,
+.router-policy-box ul {
     width: auto;
     max-width: none;
 }
 
 .rrf-example p,
-.graph-rag-guide p {
+.graph-rag-guide p,
+.refrag-agent-box p,
+.router-policy-box p {
     margin: 0.55rem 0;
 }
 
 .rrf-example p:first-child,
-.graph-rag-guide p:first-child {
+.graph-rag-guide p:first-child,
+.refrag-agent-box p:first-child,
+.router-policy-box p:first-child {
     margin-top: 0;
 }
 
 .rrf-example p:last-child,
-.graph-rag-guide p:last-child {
+.graph-rag-guide p:last-child,
+.refrag-agent-box p:last-child,
+.router-policy-box p:last-child {
     margin-bottom: 0;
 }
 
@@ -452,8 +463,15 @@ article nav[role="doc-toc"] li {
     padding-left: 1.25rem;
 }
 
-.graph-rag-guide li {
+.graph-rag-guide li,
+.router-policy-box li {
     margin: 0.45rem 0;
+}
+
+.router-policy-box ul {
+    width: auto;
+    margin: 0.65rem 0;
+    padding-left: 1.25rem;
 }
 
 .blog-side-figure {
@@ -774,7 +792,9 @@ figure[role="math"] > svg {
 
     .writing-note,
     .rrf-example,
-    .graph-rag-guide {
+    .graph-rag-guide,
+    .refrag-agent-box,
+    .router-policy-box {
         width: 100%;
     }
 
