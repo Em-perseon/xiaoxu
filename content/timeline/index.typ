@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-08-16"))[2026 · 08 · 16]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[高级 RAG 模式]
+      #html.elem("p")[整理文档分块、查询转换、重排序、上下文压缩、Self-RAG、CRAG、Adaptive RAG、Graph RAG 与 RAG-Fusion，并补充 Graph RAG 的适用场景判断。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/rag/")[阅读 RAG 笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-15"))[2026 · 08 · 15]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[检索增强生成笔记]

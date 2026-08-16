@@ -413,7 +413,8 @@ article nav[role="doc-toc"] li {
     margin: 0;
 }
 
-.rrf-example {
+.rrf-example,
+.graph-rag-guide {
     box-sizing: border-box;
     width: 55%;
     margin: 1.4rem 0;
@@ -424,21 +425,35 @@ article nav[role="doc-toc"] li {
 }
 
 .rrf-example p,
-.rrf-example figure {
+.rrf-example figure,
+.graph-rag-guide p,
+.graph-rag-guide ul {
     width: auto;
     max-width: none;
 }
 
-.rrf-example p {
+.rrf-example p,
+.graph-rag-guide p {
     margin: 0.55rem 0;
 }
 
-.rrf-example p:first-child {
+.rrf-example p:first-child,
+.graph-rag-guide p:first-child {
     margin-top: 0;
 }
 
-.rrf-example p:last-child {
+.rrf-example p:last-child,
+.graph-rag-guide p:last-child {
     margin-bottom: 0;
+}
+
+.graph-rag-guide ul {
+    margin: 0.65rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.graph-rag-guide li {
+    margin: 0.45rem 0;
 }
 
 .blog-side-figure {
@@ -758,7 +773,8 @@ figure[role="math"] > svg {
     }
 
     .writing-note,
-    .rrf-example {
+    .rrf-example,
+    .graph-rag-guide {
         width: 100%;
     }
 
