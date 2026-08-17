@@ -844,9 +844,44 @@ $
 
 == 参考资料
 
+*总览与基础*
+
 - Haggai Roitman. [The Hitchhiker's Guide to Agentic AI: From Foundations to Systems — Chapter 16: Retrieval-Augmented Generation (RAG)](https://arxiv.org/html/2606.24937v2#Ch16). arXiv:2606.24937v2, 2026。本文内容主要参考该章。
+- Yunfan Gao, Yun Xiong, Xinyu Gao, et al. [Retrieval-Augmented Generation for Large Language Models: A Survey](https://arxiv.org/abs/2312.10997). arXiv:2312.10997, 2023.
+- Patrick Lewis, Ethan Perez, Aleksandra Piktus, et al. [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401). arXiv:2005.11401, 2020.
+- Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pasupat, and Ming-Wei Chang. [REALM: Retrieval-Augmented Language Model Pre-Training](https://arxiv.org/abs/2002.08909). arXiv:2002.08909, 2020.
+
+*检索、索引与融合*
+
+- Stephen Robertson and Hugo Zaragoza. [The Probabilistic Relevance Framework: BM25 and Beyond](https://doi.org/10.1561/1500000019). Foundations and Trends in Information Retrieval, 2009.
+- Vladimir Karpukhin, Barlas Oğuz, Sewon Min, et al. [Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906). arXiv:2004.04906, 2020.
+- Yu. A. Malkov and D. A. Yashunin. [Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs](https://arxiv.org/abs/1603.09320). arXiv:1603.09320, 2016.
+- Hervé Jégou, Matthijs Douze, and Cordelia Schmid. [Product Quantization for Nearest Neighbor Search](https://doi.org/10.1109/TPAMI.2010.57). IEEE Transactions on Pattern Analysis and Machine Intelligence, 2011.
+- Gordon V. Cormack, Charles L. A. Clarke, and Stefan Büttcher. [Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods](https://doi.org/10.1145/1571941.1572114). SIGIR, 2009.
 - Thibault Formal, Benjamin Piwowarski, and Stéphane Clinchant. [SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking](https://arxiv.org/abs/2107.05720). arXiv:2107.05720, 2021.
 - Thibault Formal, Carlos Lassance, Benjamin Piwowarski, and Stéphane Clinchant. [SPLADE v2: Sparse Lexical and Expansion Model for Information Retrieval](https://arxiv.org/abs/2109.10086). arXiv:2109.10086, 2021.
 - Omar Khattab and Matei Zaharia. [ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT](https://arxiv.org/abs/2004.12832). arXiv:2004.12832, 2020.
 - Keshav Santhanam, Omar Khattab, Jon Saad-Falcon, Christopher Potts, and Matei Zaharia. [ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction](https://arxiv.org/abs/2112.01488). arXiv:2112.01488, 2021.
 - Keshav Santhanam, Omar Khattab, Christopher Potts, and Matei Zaharia. [PLAID: An Efficient Engine for Late Interaction Retrieval](https://arxiv.org/abs/2205.09707). arXiv:2205.09707, 2022.
+
+*查询转换与高级 RAG*
+
+- Luyu Gao, Xueguang Ma, Jimmy Lin, and Jamie Callan. [Precise Zero-Shot Dense Retrieval without Relevance Labels](https://arxiv.org/abs/2212.10496). arXiv:2212.10496, 2022。该文提出 HyDE。
+- Huaixiu Steven Zheng, Swaroop Mishra, Xinyun Chen, et al. [Take a Step Back: Evoking Reasoning via Abstraction in Large Language Models](https://arxiv.org/abs/2310.06117). arXiv:2310.06117, 2023.
+- Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and Hannaneh Hajishirzi. [Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection](https://arxiv.org/abs/2310.11511). arXiv:2310.11511, 2023.
+- Shi-Qi Yan, Jia-Chen Gu, Yun Zhu, and Zhen-Hua Ling. [Corrective Retrieval Augmented Generation](https://arxiv.org/abs/2401.15884). arXiv:2401.15884, 2024.
+- Soyeong Jeong, Jinheon Baek, Sukmin Cho, Sung Ju Hwang, and Jong C. Park. [Adaptive-RAG: Learning to Adapt Retrieval-Augmented Large Language Models through Question Complexity](https://arxiv.org/abs/2403.14403). arXiv:2403.14403, 2024.
+- Zackary Rackauckas. [RAG-Fusion: A New Take on Retrieval-Augmented Generation](https://arxiv.org/abs/2402.03367). arXiv:2402.03367, 2024.
+- Darren Edge, Ha Trinh, Newman Cheng, et al. [From Local to Global: A Graph RAG Approach to Query-Focused Summarization](https://arxiv.org/abs/2404.16130). arXiv:2404.16130, 2024.
+
+*智能体检索与高效解码*
+
+- Shunyu Yao, Jeffrey Zhao, Dian Yu, et al. [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629). arXiv:2210.03629, 2022.
+- Bowen Jin, Hansi Zeng, Zhenrui Yue, Dong Wang, Hamed Zamani, and Jiawei Han. [Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning](https://arxiv.org/abs/2503.09516). arXiv:2503.09516, 2025.
+- Xiaoqiang Lin, Aritra Ghosh, Bryan Kian Hsiang Low, Anshumali Shrivastava, and Vijai Mohan. [REFRAG: Rethinking RAG based Decoding](https://arxiv.org/abs/2509.01092). arXiv:2509.01092, 2025.
+
+*评估与微调*
+
+- Shahul Es, Jithin James, Luis Espinosa-Anke, and Steven Schockaert. [RAGAS: Automated Evaluation of Retrieval Augmented Generation](https://arxiv.org/abs/2309.15217). arXiv:2309.15217, 2023.
+- Nelson F. Liu, Kevin Lin, John Hewitt, et al. [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172). arXiv:2307.03172, 2023.
+- Tianjun Zhang, Shishir G. Patil, Naman Jain, et al. [RAFT: Adapting Language Model to Domain Specific RAG](https://arxiv.org/abs/2403.10131). arXiv:2403.10131, 2024.
