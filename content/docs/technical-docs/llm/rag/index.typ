@@ -88,6 +88,8 @@ $ P(a | q, D) = sum_(d in D) P_(M_theta)(a | q, d) P_"ret"(d | q, D) $
 === 稠密检索
   稠密段落检索 #footnote[这个的作用是为了找到一个好的q和d的表示]（Dense Passage Retrieval, DPR）使用两个独立的基于 BERT #footnote[
     2026-08-14：不一定是这个Encoder(虽然后面可以知道为什么要训练一个Encoder)Decoder我觉得也行。\
+    这是因为DPR 这个经典方法在原论文中使用两个独立的 BERT 编码器。\
+    但用decoder-only也行我觉得，现在没有统一成 decoder-only。生产环境仍大量使用高效的 encoder embedding；但强性能 embedding 的前沿明显越来越多地利用 Qwen/Mistral 等大型 foundation LLM 作为 backbone。
     Decoder 大模型产生的高维 contextual representation (RAG当中的embeddingg都是指contextual representation，而不是普通的token embedding）确实可以拿来构造 RAG embedding,它的 hidden state 语义非常丰富，但这个向量空间不一定是一个好的 retrieval space。] 的编码器—查询编码器$E_(Q)$和段落编码器$E_(P)$—并用对比损失训练，使相关查询-段落对在embedding空间中彼此接近。
 
   在双编码器架构中，查询和段落分别被映射为向量，并通过点积计算相似度：
@@ -510,6 +512,24 @@ $
 
 == 智能体RAG
 === 动机：静态RAG的局限
+  标准RAG遵循固定的先检索后生成模式#footnote[在标准情况下，用户query返回一个document，简单来说就是普通 RAG：我帮你查一次。Agentic RAG：你自己边想边查，prompt 告诉你该怎么查。]。它会在以下场景中失败：
+  1. 多跳问题：“Who founded the company that acquired OpenAI’s main competitor in 2023?”需要串联多次检索#footnote[就是这个问题llm不是只搜索一次，因为第一次检索到的信息可能只解决问题的一部分。llm可能会想Openai是什么？然后联想competitor这样]
+  2. 含糊查询：正确检索策略取决于已经找到的内容
+  3. 异构来源：不同子问题需要不同知识库
+  4. 迭代式细化：初始检索可能揭示需要另一个查询
+
+  #html.elem("div", attrs: (class: "router-policy-box agentic-mdp-box"))[
+    *把 RAG 视为马尔可夫决策过程*
+
+    智能体式 RAG 将检索表述为一个序贯决策问题，可以将其形式化为：
+
+    - *状态：* 当前上下文，即原始查询与截至当前已经检索到的文档；
+    - *动作：* 检索、推理、生成以及停止；
+    - *奖励：* 最终答案的正确性。
+
+    在这个视角下，智能体学习的是一个“何时检索、检索什么以及何时停止”的策略，而不是始终执行固定次数的检索。
+  ]
+
 === 智能体RAG的架构
 === 多源路由
   智能体式 RAG 系统可以把不同的子查询路由到专门的知识源。道理很简单：不同类型的问题需要不同的检索后端—没有哪一个索引能在所有场景下都做到最好。
@@ -558,6 +578,269 @@ $
 4. Generate: 使用检索文档中的引用综合最终答案。
 
 关键设计模式是条件循环：评估后，智能体要么进入生成（如果上下文足够或迭代预算耗尽），要么带着细化后的子查询回到检索。这对应了 RL 智能体在信息收集动作上运行时的感知-动作-评估循环。
+
+=== 工具增强RAG
+  智能体还可以通过将检索与计算工具进行结合
+
+=== Search-R1：通过RL训练的智能体式RAG
+  上面的智能体式 RAG 方法依赖提示工程式编排 — 智能体的搜索行为由指令控制，而不是通过训练学得。Search-R1采用一种根本不同的方法：它通过强化学习训练 LLM，使其在推理过程中学习何时搜索、搜索什么以及搜索多少次。
+
+  核心思想。 Search-R1 扩展了 DeepSeek-R1推理框架，将搜索引擎查询视为 RL 训练循环中的动作。在思维链生成期间，模型可以发出特殊 token <search>query</search> 来触发从搜索引擎实时检索。检索结果会被注入回推理上下文，模型随后继续生成。
+
+  形式化设置。模型生成一条由推理内容与搜索动作交错组成的轨迹：
+
+  $
+    underbrace(op("think")_1, "reasoning")
+    arrow.r
+    underbrace("<search>" q_1 "</search>", "action")
+    arrow.r
+    underbrace([op("results")_1], "observation")
+    arrow.r
+    op("think")_2
+    arrow.r
+    "<search>" q_2 "</search>"
+    arrow.r
+    dots
+    arrow.r
+    op("answer")
+  $
+
+  其中，`think` 表示模型的推理过程，`<search>q_i</search>` 表示第 $i$ 次搜索动作，`results_i` 表示搜索引擎返回的观察结果。整条轨迹——包括推理、搜索和最终答案——由一个终端奖励统一打分；该奖励取决于最终答案相对于真值标签的正确性。
+
+  #figure(caption: "Search-R1（RL 训练）与基于 prompt 的智能体式 RAG 对比")[
+    #table(
+      columns: (0.9fr, 1.5fr, 1.25fr),
+      align: (left, left, left),
+      inset: 8pt,
+      stroke: 0.6pt + rgb("d8dee8"),
+      table.header(
+        [*维度*],
+        [*基于 prompt 的智能体式 RAG*],
+        [*Search-R1*],
+      ),
+      [搜索决策],
+      [Prompt／启发式],
+      [通过 RL 学得],
+      [查询构造],
+      [Prompt 驱动（如“rewrite query”）],
+      [端到端训练],
+      [搜索次数],
+      [固定，或由 LLM 在推理时决定],
+      [学习最优次数],
+      [训练信号],
+      [无（模型冻结）],
+      [正确性奖励],
+      [搜索整合],
+      [追加到上下文],
+      [与 CoT 交错],
+      [失败恢复],
+      [重试启发式],
+      [学习回退或查询改写],
+      [模型推理开销],
+      [框架开销（如 LangGraph）],
+      [模型原生行为],
+    )
+  ]
+
+  #html.elem("div", attrs: (class: "router-policy-box search-r1-shift-box"))[
+    *Search-R1：范式转变*
+
+    - *传统 RAG 问的是：* “面对这个查询，我该检索些什么？”这是在生成之前便确定下来的流程决策。
+    - *Search-R1 问的是：* “根据目前已经推理到的程度，我还需要更多信息吗？如果需要，提出哪个具体问题才能补上这块缺口？”这是在生成过程中做出的、可以通过训练学习的决策。
+
+    这就像两种学生：一种在开考前先把课本整体翻一遍；另一种则是在解题途中发现卡住时，才有针对性地查找参考资料。后者通常更高效，也更有的放矢。
+  ]
+
+== 评估
+
+评估 RAG 系统比单独评估检索器或生成器更困难，因为错误可能出现在流程中的任何一环，并且会逐层累积。再完善的生成器也无法弥补一次无关的检索；反过来，再完善的检索结果，一旦遇到产生幻觉或忽略上下文的生成器，也只能被浪费。
+
+因此，有效的 RAG 评估需要同时覆盖三个层次：
+
+1. *检索质量：* 检索器是否找到了正确段落？常用指标包括 Recall、Precision、MRR 和 NDCG；
+2. *生成质量：* 答案是否正确、忠实于检索上下文并且完整？常见维度包括 Correctness、Faithfulness 和 Answer Relevance；
+3. *端到端质量：* 完整系统是否真正满足用户需求？可以通过人类偏好、任务成功率和延迟调整后的效用进行评估。
+
+一个常见失败模式是只优化其中一个层次。例如，使用很大的 $K$ 最大化 Recall@$K$，可能会让上下文充满边缘相关段落，反而降低最终生成质量。下面的指标同时覆盖检索结果的召回、准确性与排序质量，从而帮助判断系统瓶颈出现在哪个阶段。
+
+=== 检索指标
+
+令 $cal(R)_K$ 表示针对某个查询返回的前 $K$ 个检索文档集合，$cal(R)^star$ 表示该查询的相关文档集合。
+
+*Recall@$K$。* 衡量全部相关文档中，有多少出现在前 $K$ 个检索结果里：
+
+$
+  op("Recall@K")
+  = frac(
+    abs(cal(R)_K ∩ cal(R)^star),
+    abs(cal(R)^star)
+  )
+$
+
+*Precision@$K$。* 衡量前 $K$ 个检索结果中，有多少是真正相关的文档：
+
+$
+  op("Precision@K")
+  = frac(
+    abs(cal(R)_K ∩ cal(R)^star),
+    K
+  )
+$
+
+*Mean Reciprocal Rank（MRR）。* 只关注每个查询首次出现相关文档的位置，并对其排名取倒数：
+
+$
+  op("MRR")
+  = frac(1, abs(cal(Q)))
+    sum_(i=1)^abs(cal(Q))
+    frac(1, op("rank")_i)
+$
+
+其中，$cal(Q)$ 表示查询集合，$op("rank")_i$ 表示查询 $i$ 的第一个相关文档在结果列表中的排名；如果没有检索到相关文档，该查询的倒数排名记为零。
+
+*Normalized Discounted Cumulative Gain（NDCG@$K$）。* 在考虑排名位置的同时，允许每个结果具有不同等级的相关性：
+
+$
+  op("NDCG@K")
+  = frac(op("DCG@K"), op("IDCG@K")),
+  quad
+  op("DCG@K")
+  = sum_(i=1)^K
+    frac(op("rel")_i, log_2(i + 1))
+$
+
+其中，$op("rel")_i in {0, 1, 2, dots}$ 表示第 $i$ 个检索结果的分级相关性，$op("IDCG@K")$ 表示理想排序下能够获得的最大 DCG。
+
+=== 生成指标
+
+*忠实性（Faithfulness）。* 衡量生成答案是否以检索上下文为依据，也就是答案中的每一个事实性主张能否在检索文档中找到支持。该指标通常可以通过 LLM judge 拆分并核验答案中的主张：
+
+$
+  op("Faithfulness")
+  = frac(
+    "能够被检索上下文支持的主张数量",
+    "答案中的主张总数"
+  )
+$
+
+忠实性越高，表示答案越少包含脱离检索证据的幻觉内容。
+
+*答案相关性（Answer Relevance）。* 衡量答案是否真正回应了原始问题。一种计算方式是从答案中反向生成 $N$ 个问题 $hat(q)_i$，再比较这些问题与原始查询 $q$ 的 embedding 相似度：
+
+$
+  op("AnswerRelevance")
+  = frac(1, N)
+    sum_(i=1)^N
+    cos(E(q), E(hat(q)_i))
+$
+
+其中，$E(q)$ 表示原始查询的 embedding，$E(hat(q)_i)$ 表示根据答案生成的第 $i$ 个问题的 embedding。如果答案确实回应了原问题，反向生成的问题通常会与原查询更加相似。
+
+*上下文精确率（Context Precision@$K$）。* 衡量相关文档是否集中在检索列表的靠前位置：
+
+$
+  op("ContextPrecision@K")
+  = frac(1, K)
+    sum_(k=1)^K
+    op("Precision@k")
+    dot 1[op("doc")_k "相关"]
+$
+
+其中，$1[op("doc")_k "相关"]$ 是指示函数：当第 $k$ 个文档相关时取 1，否则取 0。相关文档出现得越早，上下文精确率越高。
+
+*上下文召回率（Context Recall）。* 衡量回答真值中需要的事实，有多少能够归因于当前检索上下文：
+
+$
+  op("ContextRecall")
+  = frac(
+    "可以归因于检索上下文的真值主张数量",
+    "真值主张总数"
+  )
+$
+
+上下文召回率较低意味着检索阶段遗漏了回答问题所需的关键信息，即使生成器本身能力很强，也难以生成完整答案。
+
+=== RAGAs
+  RAGAs（Retrieval Augmented Generation Assessment）提供了一个使用 LLM judge 的无参考评估框架#footnote[就是调用llm来评估针对用户的query的一套“检索得好不好 + 最终回答得好不好”的评测框架。]
+
+=== 常见失败模式
+
+#html.elem("div", attrs: (class: "rag-failure-box"))[
+  #html.elem("div", attrs: (class: "rag-failure-title"))[需要监控的 RAG 失败模式]
+  #html.elem("div", attrs: (class: "rag-failure-body"))[
+    1. *检索遗漏：* 相关文档存在于语料库中，却没有被检索到。常见原因包括分块质量较差、embedding 模型不匹配，以及查询与文档之间存在较大的词汇差异。
+    2. *上下文污染：* 检索到的文档包含错误、无关或彼此矛盾的信息，导致模型基于受污染的上下文生成错误答案。
+    3. *Lost-in-the-Middle：* LLM 往往更关注长上下文的开头和结尾，位于中间位置的相关信息可能被忽略。
+    4. *过度检索：* 检索过多文本块会稀释真正相关的信号，同时增加上下文长度、推理延迟与调用成本。
+    5. *检索后仍然幻觉：* 模型忽略已经检索到的上下文，转而依靠参数化记忆生成答案，尤其容易发生在检索内容与训练数据相互矛盾时。
+    6. *编造引用：* 模型将某个主张错误地归因于并不支持该主张的文档，形成看似有依据、实际无法验证的引用。
+  ]
+]
+
+== RAG 与微调的协同
+
+=== 何时结合 RAG 与微调
+
+微调与 RAG 解决的是彼此互补的问题：
+
+- *仅微调：* 模型可以学会特定的表达风格、输出格式和任务行为，但仍然可能产生事实性幻觉；
+- *仅 RAG：* 模型可以访问外部事实，却不一定知道如何以最佳方式使用这些事实；
+- *结合使用：* 微调模型学习如何利用检索上下文，例如引用信息来源、承认不确定性，以及忽略与问题无关的上下文。
+
+=== RAFT：检索增强微调
+
+RAFT（Retrieval-Augmented Fine-Tuning）使用相关文档与干扰文档的混合上下文训练模型回答问题，使模型学会识别并只使用真正相关的证据：
+
+1. 对每个训练样本 $(q, a, d^star)$，额外采样 $k - 1$ 个干扰文档 ${d_i^-}$；
+2. 将查询、相关文档和干扰文档共同作为微调输入：
+
+$
+  [q, d^star, d_1^-, dots, d_(k - 1)^-]
+  arrow.r
+  [op("chain-of-thought") + a]
+$
+
+3. 在思维链中显式引用相关文档 $d^star$，使答案建立在可识别的检索证据上。
+
+RAFT 的训练目标可以写为：
+
+$
+  cal(L)_"RAFT"
+  = -op("E")_((q, a, d^star, {d_i^-}))
+    [
+      log P_theta(
+        op("CoT")(d^star) ⊕ a
+        | q, d^star, {d_i^-}
+      )
+    ]
+$
+
+其中，$q$ 是查询，$a$ 是目标答案，$d^star$ 是与问题相关的文档，${d_i^-}$ 是干扰文档集合，$theta$ 表示生成模型参数。
+
+=== 检索器—生成器联合训练
+
+为了获得更高的端到端性能，可以联合训练检索器和生成器，使最终答案的训练信号通过生成步骤反向影响检索策略。令 $P_phi(d | q)$ 表示检索器为文档 $d$ 分配的概率，$P_theta(a | q, d)$ 表示生成器基于查询和文档生成答案的概率，则联合目标可以写为：
+
+$
+  nabla_(theta, phi) cal(L)
+  = nabla_(theta, phi)
+    [
+      -log
+      sum_(d in cal(D))
+      P_theta(a | q, d)
+      dot P_phi(d | q)
+    ]
+$
+
+检索器参数 $phi$ 可以通过 REINFORCE 估计器更新，也可以将 $P_phi(d | q)$ 视为文档上的可微注意力分布进行优化。
+
+#html.elem("div", attrs: (class: "router-policy-box joint-training-box"))[
+  *联合训练的挑战*
+
+  1. 随着检索器参数 $phi$ 持续变化，文档索引必须周期性刷新，通常需要采用异步索引更新；
+  2. 训练信号较为稀疏，因为只有进入 top-$k$ 的少量文档能够对当前答案产生贡献；
+  3. 如果检索器没有使用预训练参数进行良好初始化，联合训练过程可能不稳定。
+]
 
 == 参考资料
 

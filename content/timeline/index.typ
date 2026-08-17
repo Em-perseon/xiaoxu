@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-08-17"))[2026 · 08 · 17]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[智能体 RAG、评估与微调]
+      #html.elem("p")[补充智能体式 RAG 的 MDP 与路由视角、Search-R1 训练范式、RAG 检索与生成评估指标、常见失败模式，以及 RAFT 和检索器—生成器联合训练。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/rag/")[阅读 RAG 笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-16"))[2026 · 08 · 16]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[高级 RAG 模式]

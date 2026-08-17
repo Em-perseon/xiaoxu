@@ -416,7 +416,8 @@ article nav[role="doc-toc"] li {
 .rrf-example,
 .graph-rag-guide,
 .refrag-agent-box,
-.router-policy-box {
+.router-policy-box,
+.rag-failure-box {
     box-sizing: border-box;
     width: 55%;
     margin: 1.4rem 0;
@@ -424,6 +425,8 @@ article nav[role="doc-toc"] li {
     border: 1px solid rgba(70, 70, 70, 0.42);
     border-radius: 0.25rem;
     background: rgba(128, 128, 128, 0.06);
+    font-size: 1.2rem;
+    line-height: 1.6;
 }
 
 .rrf-example p,
@@ -435,6 +438,8 @@ article nav[role="doc-toc"] li {
 .router-policy-box ul {
     width: auto;
     max-width: none;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 .rrf-example p,
@@ -466,12 +471,44 @@ article nav[role="doc-toc"] li {
 .graph-rag-guide li,
 .router-policy-box li {
     margin: 0.45rem 0;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+figure > table {
+    width: 100%;
 }
 
 .router-policy-box ul {
     width: auto;
     margin: 0.65rem 0;
     padding-left: 1.25rem;
+}
+
+.rag-failure-title {
+    margin-bottom: 0.65rem;
+    font-size: inherit;
+    font-weight: 650;
+    line-height: inherit;
+}
+
+.rag-failure-body {
+    padding: 0;
+}
+
+.rag-failure-body ol {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding-left: 1.35rem;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.rag-failure-body li {
+    margin: 0.5rem 0;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 .blog-side-figure {
@@ -794,7 +831,8 @@ figure[role="math"] > svg {
     .rrf-example,
     .graph-rag-guide,
     .refrag-agent-box,
-    .router-policy-box {
+    .router-policy-box,
+    .rag-failure-box {
         width: 100%;
     }
 
