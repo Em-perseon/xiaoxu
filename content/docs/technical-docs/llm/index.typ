@@ -11,4 +11,5 @@
 #html.elem("nav", attrs: (class: "section-index", aria-label: "大语言模型专题"))[
   #html.elem("a", attrs: (href: "rag/"))[#html.elem("span")[检索增强生成（RAG）] #html.elem("b")[→]]
   #html.elem("a", attrs: (href: "reinforcement-learning/"))[#html.elem("span")[强化学习入门] #html.elem("b")[→]]
+  #html.elem("a", attrs: (href: "agent-memory/"))[#html.elem("span")[智能体记忆系统] #html.elem("b")[→]]
 ]

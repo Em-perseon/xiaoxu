@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-08-18"))[2026 · 08 · 18]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[智能体记忆系统]
+      #html.elem("p")[创建智能体记忆系统专题，整理认知架构中的四类记忆，并补充基于 RAG、摘要和知识图谱的记忆组织方式。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/agent-memory/")[阅读智能体记忆系统 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-17"))[2026 · 08 · 17]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[智能体 RAG、评估与微调]
