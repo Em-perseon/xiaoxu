@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-08-19"))[2026 · 08 · 19]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[PPO 与 LLM 对齐]
+      #html.elem("p")[整理 PPO 的重要性采样、GAE、裁剪目标与 Actor-Critic 流程，并补充 LLM 中 policy、reference、value、reward 四类模型、per-token KL 奖励和实际损失实现。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/reinforcement-learning/ppo/")[阅读 PPO 笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-18"))[2026 · 08 · 18]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[智能体记忆系统]
