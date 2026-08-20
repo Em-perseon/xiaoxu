@@ -163,7 +163,7 @@ $ A_i approx frac(r_i - overline(r), sigma_r) $
 
 == 关键符号速查
 
-#table(
+#let symbol-table = table(
   columns: (1.1fr, 2.4fr),
   align: (left, left),
   inset: 8pt,
@@ -183,6 +183,14 @@ $ A_i approx frac(r_i - overline(r), sigma_r) $
   [$epsilon$], [策略比率裁剪范围。],
   [$beta$], [KL 惩罚系数。],
 )
+
+#context {
+  if target() == "html" {
+    html.elem("div", attrs: (style: "display: flex; justify-content: center;"))[#symbol-table]
+  } else {
+    align(center)[#symbol-table]
+  }
+}
 
 == 小结
 
