@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-08-20"))[2026 · 08 · 20]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[群组相对策略优化（GRPO）]
+      #html.elem("p")[整理 GRPO 与 PPO 的差异、组内相对优势、裁剪目标、参考模型 KL 正则，以及 LLM 中去掉 Critic 后的训练流程。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/reinforcement-learning/grpo/")[阅读 GRPO 笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-19"))[2026 · 08 · 19]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[PPO 与 LLM 对齐]

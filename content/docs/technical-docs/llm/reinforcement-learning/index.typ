@@ -111,3 +111,4 @@ Actor 负责决策，Critic 负责评价。这种方法兼具策略的表达能�
 - #link("policy-gradient/")[策略梯度]
 - #link("actor-critic/")[Actor-Critic 方法]
 - #link("ppo/")[近端策略优化（PPO）]
+- #link("grpo/")[群组相对策略优化（GRPO）]
