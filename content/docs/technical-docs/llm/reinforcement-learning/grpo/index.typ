@@ -186,7 +186,7 @@ $ A_i approx frac(r_i - overline(r), sigma_r) $
 
 #context {
   if target() == "html" {
-    html.elem("div", attrs: (style: "display: flex; justify-content: center;"))[#symbol-table]
+    html.elem("div", attrs: (class: "grpo-symbol-table"))[#symbol-table]
   } else {
     align(center)[#symbol-table]
   }

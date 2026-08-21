@@ -479,6 +479,16 @@ figure > table {
     width: 100%;
 }
 
+/* Keep the compact GRPO symbol table in the article column and center it;
+   the default Tufte table float otherwise pushes it into the side margin. */
+.grpo-symbol-table > table {
+    float: none;
+    width: auto;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .router-policy-box ul {
     width: auto;
     margin: 0.65rem 0;
