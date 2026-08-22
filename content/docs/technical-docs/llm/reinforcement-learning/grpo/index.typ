@@ -165,7 +165,7 @@ $ A_i approx frac(r_i - overline(r), sigma_r) $
 
 #let symbol-table = table(
   columns: (1.1fr, 2.4fr),
-  align: (left, left),
+  align: (center, center),
   inset: 8pt,
   stroke: 0.6pt + rgb("d8dee8"),
   table.header(
