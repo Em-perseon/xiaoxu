@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-08-23"))[2026 · 08 · 23]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[智能体记忆系统深化]
+      #html.elem("p")[补充多轮对话记忆、多智能体共享记忆、强化学习训练记忆系统、记忆评估指标与长期评估缺口，并总结记忆系统的架构、操作和开放问题。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/agent-memory/")[阅读智能体记忆系统 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-20"))[2026 · 08 · 20]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[群组相对策略优化（GRPO）]
