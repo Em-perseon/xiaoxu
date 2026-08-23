@@ -489,6 +489,11 @@ figure > table {
     margin-right: auto;
 }
 
+.grpo-symbol-table > table th,
+.grpo-symbol-table > table td {
+    text-align: center;
+}
+
 .router-policy-box ul {
     width: auto;
     margin: 0.65rem 0;
