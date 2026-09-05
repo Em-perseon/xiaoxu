@@ -214,6 +214,29 @@
     font-size: 0.92rem;
 }
 
+.screenshot-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    width: 100%;
+}
+
+.screenshot-comparison-item {
+    min-width: 0;
+}
+
+.screenshot-comparison-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.screenshot-label {
+    margin: 0 0 0.55rem;
+    text-align: center;
+    font-weight: 650;
+}
+
 .timeline {
     position: relative;
     box-sizing: border-box;

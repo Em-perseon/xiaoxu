@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-09-05"))[2026 · 09 · 05]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[我要成为菲律宾人]
+      #html.elem("p")[记录在 ChatGPT 方案页面变化后，如何通过 Clash Verge 和代理节点继续折腾菲律宾区方案的过程。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/tinkering/clash-verge-node/")[阅读这次折腾 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-08-23"))[2026 · 08 · 23]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[智能体记忆系统深化]
