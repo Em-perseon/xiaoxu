@@ -10,6 +10,24 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-09-15"))[2026 · 09 · 15]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[On-Policy Distillation（OPD）]
+      #html.elem("p")[新增独立专题，整理 student 自生成轨迹上的 teacher 反馈、reverse KL、训练流程与搜索 Agent 示例，并讨论它与 RL、普通蒸馏及 credit assignment 的关系。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/reinforcement-learning/on-policy-distillation/")[阅读 OPD 专题 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-09-15"))[2026 · 09 · 15]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[LLM 中的 Actor-Critic]
+      #html.elem("p")[新增独立专题，通过 Search Agent 和 token 生成例子讲解终局奖励、return、Critic 价值估计与 advantage 如何指导 Actor 更新，以及长链训练中的 credit assignment 难题。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/reinforcement-learning/llm-actor-critic/")[阅读 Actor-Critic 专题 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-09-05"))[2026 · 09 · 05]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[我要成为菲律宾人]
