@@ -85,7 +85,7 @@ RL 优化任务回报：
 
 $ J_"RL"(theta) = E_(o ~ pi_theta(dot | q))[R(q, o)] $
 
-在这种设置里，一次成功不代表每个搜索动作都必要；一次失败也不代表前面的每一步都错了。return、Critic 和 GAE 可以构造训练信号，但具体动作的 credit assignment 仍然困难。
+在这种设置里，一次成功不代表每个搜索动作都必要；一次失败也不代表前面的每一步都错了。return、Critic 和 GAE 可以构造训练信号，但具体动作的 credit assignment 仍然困难。#footnote[这是因为Critic 不是“知道每一步真正贡献是多少”，它只是学习一个预测器，预测未来回报。]
 
 OPD 的反馈来自 teacher 在相同前缀下的分布。可以把它想象成老师查看学生自己的草稿，在许多位置给出继续写下去的建议。Thinking Machines 的实现将 student 和 teacher 对已采样 token 的 log probability 差异转成逐 token 的训练权重。#footnote[#link("https://thinkingmachines.ai/blog/on-policy-distillation/")[Thinking Machines：On-Policy Distillation]，下文的 sampled-token reverse KL 流程参考该实现。]
 

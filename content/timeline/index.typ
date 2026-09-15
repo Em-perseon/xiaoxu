@@ -13,7 +13,7 @@
     #html.elem("time", attrs: (datetime: "2026-09-15"))[2026 · 09 · 15]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[On-Policy Distillation（OPD）]
-      #html.elem("p")[新增独立专题，整理 student 自生成轨迹上的 teacher 反馈、reverse KL、训练流程与搜索 Agent 示例，并讨论它与 RL、普通蒸馏及 credit assignment 的关系。]
+      #html.elem("p")[新增独立专题，整理 student 自生成轨迹上的 teacher 反馈、reverse KL、训练流程与搜索 Agent 示例，并讨论它与 RL、普通蒸馏及 credit assignment 的关系；补充 Critic 回报预测与动作真实贡献之间的区别。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/reinforcement-learning/on-policy-distillation/")[阅读 OPD 专题 →]]
     ]
   ]
