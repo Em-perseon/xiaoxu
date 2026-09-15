@@ -113,3 +113,4 @@ Actor 负责决策，Critic 负责评价。这种方法兼具策略的表达能�
 - #link("llm-actor-critic/")[LLM 中的 Actor-Critic]
 - #link("ppo/")[近端策略优化（PPO）]
 - #link("grpo/")[群组相对策略优化（GRPO）]
+- #link("on-policy-distillation/")[On-Policy Distillation（OPD）]
