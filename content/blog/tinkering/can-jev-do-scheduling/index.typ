@@ -4,7 +4,15 @@
 
 #html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/blog/tinkering/"))[← 返回瞎折腾]
 
-= Can JEV Do Scheduling? A Study of Typed Decisions in Event-Driven Queueing Networks
+= Can JEV Do Scheduling?
+
+#context {
+  if target() == "html" {
+    html.elem("p", attrs: (class: "article-subtitle"))[A Study of Typed Decisions in Event-Driven Queueing Networks]
+  } else {
+    block(width: 100%)[#text(size: 15pt, style: "italic")[A Study of Typed Decisions in Event-Driven Queueing Networks]]
+  }
+}
 
 #html.elem("p", attrs: (class: "article-lead"))[
   我们把一个类型化决策模型放进事件驱动的队列网络，让它在每次到达和服务完成后接管全部服务器。九条轨迹、九万次决策之后，答案既不是“Yes”，也不是“No”。

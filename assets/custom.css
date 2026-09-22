@@ -124,6 +124,17 @@
     line-height: 1.65;
 }
 
+.article-subtitle {
+    box-sizing: border-box;
+    width: 55%;
+    max-width: 55%;
+    margin: -0.35rem 0 1.35rem;
+    color: #555;
+    font-size: 1.38rem;
+    font-style: italic;
+    line-height: 1.35;
+}
+
 .back-link {
     display: inline-flex;
     align-items: center;
@@ -877,6 +888,7 @@ figure[role="math"] > svg {
     .section-index,
     .section-empty,
     .timeline,
+    .article-subtitle,
     article nav[role="doc-toc"] {
         width: 100%;
     }
