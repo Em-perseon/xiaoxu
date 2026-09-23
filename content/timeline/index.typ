@@ -10,10 +10,10 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
-    #html.elem("time", attrs: (datetime: "2026-09-22"))[2026 · 09 · 22]
+    #html.elem("time", attrs: (datetime: "2026-09-23"))[2026 · 09 · 23]
     #html.elem("div", attrs: (class: "timeline-content"))[
-      #html.elem("h3")[Can JEV Do Scheduling? A Study of Typed Decisions in Event-Driven Queueing Networks]
-      #html.elem("p")[从 Jev 的 System One 类型化决策接口出发，将它迁移为事件驱动队列控制器，并在三个场景中完成九万次联合调度决策；记录 Reentrant-2 的意外优势、Criss-Cross 的失败，以及提示策略、依赖版本与评测边界带来的问题。]
+      #html.elem("h3")[Can JEV Do Scheduling? A 200-Event Pilot with Structured State and Objective History]
+      #html.elem("p")[依据新的初步测试口径重写：使用统一紧凑状态与客观历史，在三个队列网络、五个种子和每条 200 事件上比较 Jev4Schedule 与 cμ、CMuQ、MaxPressure，并记录一段真实闭环调度轨迹。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/tinkering/can-jev-do-scheduling/")[阅读这次折腾 →]]
     ]
   ]

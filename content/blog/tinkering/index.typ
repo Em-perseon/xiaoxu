@@ -15,6 +15,7 @@
 == 折腾记录
 
 #html.elem("nav", attrs: (class: "section-index", aria-label: "瞎折腾记录"))[
-  #html.elem("a", attrs: (href: "can-jev-do-scheduling/"))[#html.elem("span")[Can JEV Do Scheduling? A Study of Typed Decisions in Event-Driven Queueing Networks] #html.elem("b")[2026 · 09 · 22　→]]
+  #html.elem("a", attrs: (href: "system-one-system-two-guidance/"))[#html.elem("span")[System One 执行，System Two 指导] #html.elem("b")[想法草稿　→]]
+  #html.elem("a", attrs: (href: "can-jev-do-scheduling/"))[#html.elem("span")[Can JEV Do Scheduling? A 200-Event Pilot with Structured State and Objective History] #html.elem("b")[2026 · 09 · 23　→]]
   #html.elem("a", attrs: (href: "clash-verge-node/"))[#html.elem("span")[我要成为菲律宾人] #html.elem("b")[开始记录　→]]
 ]
