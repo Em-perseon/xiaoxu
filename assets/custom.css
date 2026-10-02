@@ -588,6 +588,44 @@ figure > table {
     border-radius: 4px;
 }
 
+.agent-eval-figure {
+    box-sizing: border-box;
+    width: min(92%, 76rem);
+    max-width: none;
+    margin: 2rem 0 2.25rem;
+    overflow: visible;
+}
+
+.agent-eval-figure img {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-height: none;
+    border: 1px solid rgba(90, 90, 90, 0.22);
+    border-radius: 8px;
+    background: #fffff8;
+}
+
+.agent-eval-figure figcaption {
+    width: 55%;
+    margin-top: 0.7rem;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+@media (max-width: 850px) {
+    .agent-eval-figure {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .agent-eval-figure img {
+        width: 760px;
+        max-width: none;
+    }
+}
+
 /* ColBERT diagrams use the existing Tufte margin-note float, so they occupy
    the right-hand margin without narrowing or entering the article column. */
 .colbert-side-note {

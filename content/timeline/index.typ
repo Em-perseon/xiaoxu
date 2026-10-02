@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-10-02"))[2026 · 10 · 02]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[别只看 Agent 的最后一句话]
+      #html.elem("p")[将 Agent Evaluation Harness 笔记重组为一篇完整文章：沿一次 episode 的生命周期串起实验契约、交互执行、状态与轨迹评分、可靠性、安全审计和线上失败回流，并重绘分层架构图。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/agent-evaluation-harness/")[阅读 Agent 评测文章 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-09-23"))[2026 · 09 · 23]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[Can JEV Do Scheduling? A 200-Event Pilot with Structured State and Objective History]
