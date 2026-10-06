@@ -135,6 +135,77 @@
     line-height: 1.35;
 }
 
+/* Typst exports fenced code as <pre><code>. Give it a real code-block
+   container instead of letting it blend into the surrounding prose. */
+article pre {
+    box-sizing: border-box;
+    width: 55%;
+    max-width: 55%;
+    margin: 1.35rem 0 1.65rem;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    border: 1px solid rgba(76, 88, 104, 0.32);
+    border-left: 3px solid rgba(76, 88, 104, 0.72);
+    border-radius: 6px;
+    background: rgba(241, 244, 247, 0.82);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.78) inset;
+    color: #28323b;
+    font-size: 0.88rem;
+    line-height: 1.58;
+    tab-size: 4;
+}
+
+article pre code {
+    display: block;
+    min-width: max-content;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+        monospace;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: pre;
+}
+
+/* Inline code remains compact so short identifiers do not look like blocks. */
+article p > code,
+article li > code,
+article td > code {
+    padding: 0.08em 0.32em;
+    border: 1px solid rgba(76, 88, 104, 0.2);
+    border-radius: 4px;
+    background: rgba(76, 88, 104, 0.08);
+    color: #303944;
+    font-size: 0.88em;
+}
+
+@media (max-width: 760px) {
+    article pre {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    article pre {
+        border-color: rgba(190, 202, 216, 0.34);
+        border-left-color: rgba(190, 202, 216, 0.72);
+        background: rgba(35, 42, 50, 0.9);
+        box-shadow: none;
+        color: #e3e9ef;
+    }
+
+    article p > code,
+    article li > code,
+    article td > code {
+        border-color: rgba(190, 202, 216, 0.25);
+        background: rgba(190, 202, 216, 0.12);
+        color: #e3e9ef;
+    }
+}
+
 .back-link {
     display: inline-flex;
     align-items: center;
