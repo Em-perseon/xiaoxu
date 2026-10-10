@@ -14,7 +14,6 @@ content/docs/index.typ             Docs
 content/docs/technical-docs/       Technical documentation
 content/docs/course-notes/         Course notes
 content/blog/index.typ             Blog index
-content/blog/hello-world/index.typ Blog post
 content/cv/index.typ               CV
 config.typ                         Site navigation and shared config
 assets/                            CSS and static assets
