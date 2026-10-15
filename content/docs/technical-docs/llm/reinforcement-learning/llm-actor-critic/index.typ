@@ -8,6 +8,17 @@
 
 #heading(level: 1, outlined: false)[LLM 中的 Actor-Critic]
 
+#html.elem("iframe", attrs: (
+  src: "/xiaoxu/assets/actor-critic/index.html",
+  title: "LLM Actor-Critic 强化学习更新交互动画",
+  class: "actor-critic-animation",
+  loading: "lazy",
+))[]
+
+#link("/xiaoxu/assets/actor-critic/index.html")[单独打开动画 →]
+
+动画为简化教学模型，具体计算与 PPO 的区别见动画下方“看完再看原理”。
+
 #outline(title: [目录], depth: 3)
 
 在 LLM 的 RLHF、RLVR 和长链 Agent 训练中，最终奖励往往只在回答结束时出现，但策略模型和价值模型却要在每一个生成 token 或工具调用上得到训练信号。本页专门解释 terminal reward 如何通过 return 和 advantage 影响 Actor 与 Critic，以及为什么这最终会变成 credit assignment 问题。

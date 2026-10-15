@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Actor 与 Critic 怎样一起学习</title>
+<link rel="stylesheet" href="style.css"><script src="model.js" defer></script><script src="player.js" defer></script>
+</head>
+<body>
+<main>
+  <header><span class="eyebrow">三轮经历 · 持续学习</span><div class="scenario"><button id="success" aria-pressed="true">先答对</button><button id="failure" aria-pressed="false">先答错</button></div></header>
+  <nav class="rounds" aria-label="学习轮次"><button data-round="0" aria-pressed="true">第 1 轮</button><button data-round="1" aria-pressed="false">第 2 轮</button><button data-round="2" aria-pressed="false">第 3 轮</button></nav>
+  <h1 id="caption" aria-live="polite">先让 Actor 试着回答</h1>
+  <div class="stage">
+    <svg id="movie" viewBox="0 0 900 520" role="img" aria-labelledby="movie-title movie-description">
+      <title id="movie-title">Actor-Critic 学习过程动画</title><desc id="movie-description">Actor 生成回答，评判器给出奖励，回报与旧价值比较后形成优势，最后分别更新策略和价值预测。</desc>
+      <defs>
+        <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#d9dfd8"/></pattern>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#95a59d" stroke-width="1.5"/></marker>
+        <g id="robot" stroke="#247b69" stroke-width="3" stroke-linejoin="round">
+          <path d="M-24 67v27M24 67v27" stroke-width="13"/><rect x="-44" y="89" width="36" height="17" rx="8" fill="#247b69"/><rect x="8" y="89" width="36" height="17" rx="8" fill="#247b69"/>
+          <path d="M-48 10Q-77 13-74 49M48 10Q77 4 80-20" fill="none" stroke-width="13"/><circle cx="-74" cy="54" r="11" fill="#d4ebe3"/><circle cx="81" cy="-26" r="11" fill="#d4ebe3"/>
+          <rect x="-45" y="-6" width="90" height="79" rx="22" fill="#d4ebe3"/><rect x="-28" y="12" width="56" height="36" rx="9" fill="#fff"/><path d="M-16 31h9l5-9 8 18 6-9h6" fill="none"/><circle cy="60" r="3" fill="#247b69"/>
+          <path d="M0-94v-17"/><circle cy="-117" r="6" fill="#e9bc62"/><rect x="-57" y="-95" width="114" height="85" rx="25" fill="#e1f1ea"/><rect x="-43" y="-79" width="86" height="47" rx="16" fill="#253c34" stroke="none"/><path d="M-26-57v6M26-57v6" stroke="#9fe4ce" stroke-width="7" stroke-linecap="round"/><path d="M-12-48q12 11 24 0" fill="none" stroke="#9fe4ce" stroke-width="3"/>
+        </g>
+        <g id="critic" stroke="#ac7538" stroke-width="3" stroke-linejoin="round">
+          <path d="M-24 67v27M24 67v27" stroke-width="13"/><rect x="-44" y="89" width="36" height="17" rx="8" fill="#ac7538"/><rect x="8" y="89" width="36" height="17" rx="8" fill="#ac7538"/>
+          <path d="M-48 10Q-76 18-71 51M48 10Q76 18 71 51" fill="none" stroke-width="13"/><circle cx="-71" cy="55" r="11" fill="#f6e4c7"/><circle cx="71" cy="55" r="11" fill="#f6e4c7"/>
+          <rect x="-45" y="-6" width="90" height="79" rx="22" fill="#f6e4c7"/><rect x="-28" y="12" width="56" height="36" rx="9" fill="#fffaf0"/><path d="M-16 39V30M0 39V22M16 39V17" stroke-width="6" stroke-linecap="round"/><circle cy="60" r="3" fill="#ac7538"/>
+          <path d="M0-94v-17"/><circle cy="-117" r="6" fill="#d9b785"/><rect x="-57" y="-95" width="114" height="85" rx="25" fill="#fff0d8"/>
+          <circle cx="-23" cy="-59" r="18" fill="#fffaf0" stroke="#805c34"/><circle cx="23" cy="-59" r="18" fill="#fffaf0" stroke="#805c34"/><path d="M-5-59H5M-41-59H-53M41-59H53" stroke="#805c34"/><circle cx="-23" cy="-58" r="5" fill="#805c34" stroke="none"/><circle cx="23" cy="-58" r="5" fill="#805c34" stroke="none"/><path d="M-12-29q12 8 24 0" fill="none" stroke="#805c34" stroke-linecap="round"/>
+        </g>
+        <g id="judge"><path d="M-64-64H42L64-42V68H-64Z" fill="#fff" stroke="#7d899f" stroke-width="3"/><path d="M42-64v23h22M-38-20H35M-38 0H35M-38 20H10" fill="none" stroke="#b8c0cd" stroke-width="4"/></g>
+      </defs>
+      <rect width="900" height="520" fill="url(#dots)" opacity=".45"/>
+      <g id="scene"></g>
+    </svg>
+    <div id="subtitle" class="subtitle">问题：2 + 2 = ?</div>
+  </div>
+  <div class="progress"><input id="seek" type="range" min="0" max="177" step="0.05" value="0" aria-label="动画进度"><span id="time">00:00 / 02:57</span></div>
+  <div class="transport"><button id="play" class="primary">▶ 播放</button><button id="replay" aria-label="从头重播">↺ 重播</button><button id="next">下一幕 →</button><span id="chapter">1 / 7 · 生成</span></div>
+  <details><summary>看完再看原理</summary><p>绿色机器人是 Actor，负责选择输出；戴眼镜的是 Critic，负责预测未来回报。评分来自独立的评判器。三轮回答是预设的教学样例，不是随机采样，也不代表下一轮一定答对；但每轮的策略概率和价值预估都继承上一轮的更新。这里固定 γ = 1，初始价值为 0.2、0.5、0.8。光点表示训练信号，不表示梯度穿过环境。</p><p>Actor 更新镜头放大最后一个位置：相同问题与前缀“答案是”下，只保留候选 4 和 5，二者概率之和始终为 100%。采样动作的优势 A = G − V旧；固定优势后，按 z新 = z旧 + 0.5A(1−p旧)、p新 = sigmoid(z新) 更新。优势不是直接加到概率上的百分点。选中 5 时，用它自己的概率计算梯度，再取补数得到 4 的概率。Critic 按 V新 = V旧 + 0.5(G−V旧) 更新。</p><p>前两个位置也进行独立的二选一策略更新，动画只放大最后一处。真实 LLM 使用全词表且共享参数，其他候选不一定都同向变化；PPO 还涉及 GAE、概率比与裁剪。token 为示意划分，优势不能证明动作的因果贡献。</p></details>
+  <details><summary>为什么 Critic 要这样调整？</summary><p>Critic 要降低预估与实际回报的平方误差：L = ½(V − G)²。对这里独立的标量 V 求导，梯度为 V − G。沿梯度的反方向更新，得到 V新 = V旧 − α(V旧 − G) = V旧 + α(G − V旧)。因此估高了就调低，估低了就调高。</p><p>例如旧预估 0.60，实际回报 0，学习率 0.5：V新 = 0.60 + 0.5 × (0 − 0.60) = 0.30。平方损失从 0.18 降到 0.045。这里选择 0.5 只是为了演示“修正一半差距”，不是固定的算法要求。</p><p>每一行对应生成一个 token 之前的状态，包含原问题和已经生成的前缀；Critic 预测从该状态开始的未来回报，而不是给单个 token 打分。真实神经网络更新的是参数 φ：φ新 = φ旧 − α∇φ L；重新前向计算得到的新 V 不一定恰好移动一半。</p></details>
+  <details><summary>为什么 Actor 的概率会这样变化？</summary><p>目标不是模仿某个固定答案，而是提高期望回报 J(θ) = E[R]。策略梯度用采样得到的优势估计更新方向：∇θ J ≈ A ∇θ log πθ(a|s)。状态价值作为与当前动作无关的基线，用来减少梯度估计的方差。实现时最小化 L = −A log πθ(a|s)，并把本轮算好的 A 当作常数，不沿 A 更新 Actor。</p><p>A 为正时，提高已采样动作的概率会降低这项损失；A 为负时，降低概率会降低损失。这是一次采样提供的学习信号，不证明该动作本身造成了成功，也不保证每次更新都提高真实任务表现。决定方向的是优势，不是仅看答案对错。</p><p>本动画是独立二选一策略：p = sigmoid(z)，z = ln[p/(1−p)] 是已采样动作相对另一个候选的倾向分数。由 ∂L/∂z = −A(1−p)，梯度下降得到 z新 = z旧 + αA(1−p旧)，然后计算 p新 = sigmoid(z新)。例如 p旧 = 0.20、A = 0.20、α = 0.5：z 从 −1.386 增加 0.080 到 −1.306，p 从 20.0% 变为约 21.3%，不是直接增加 20 个百分点。</p><p>真实 LLM 更新网络参数：θ新 = θ旧 + αA∇θ log πθ(a|s)，再重新计算全词表概率；并不是直接修改一个独立的 z。这里演示基础策略梯度，不是完整 PPO，未包含概率比裁剪等约束。</p></details>
+  <noscript>请启用 JavaScript 播放动画。过程：生成回答 → 评分 → 回报 → 与旧预估比较 → 分别更新 Actor 和 Critic。</noscript>
+</main>
+</body></html>

@@ -12,6 +12,15 @@
   #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-10-15"))[2026 · 10 · 15]
     #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[Actor-Critic 更新动画]
+      #html.elem("p")[跟随机器人经历三轮回答，观看优势如何改变候选答案的概率，以及 Critic 如何逐轮校准预估。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/technical-docs/llm/reinforcement-learning/llm-actor-critic/")[查看 Actor-Critic 动画 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-10-15"))[2026 · 10 · 15]
+    #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[人工智能与经管研究]
       #html.elem("p")[新增人工智能与经管研究课程及期中复习笔记，涵盖神经网络、文本表示、Attention、Transformer、模型微调、RAG 与 Agent。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/course-notes/ai-and-management-research/")[阅读课程笔记 →]]

@@ -1,3 +1,17 @@
+.actor-critic-animation {
+    display: block;
+    width: 100%;
+    max-width: 1040px;
+    height: 900px;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 12px;
+}
+
+@media (max-width: 760px) {
+    .actor-critic-animation { height: 590px; }
+}
+
 .home-layout {
     display: grid;
     grid-template-columns: 144px minmax(0, 42rem);
