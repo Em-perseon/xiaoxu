@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-10-15"))[2026 · 10 · 15]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[人工智能与经管研究]
+      #html.elem("p")[新增人工智能与经管研究课程及期中复习笔记，涵盖神经网络、文本表示、Attention、Transformer、模型微调、RAG 与 Agent。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/course-notes/ai-and-management-research/")[阅读课程笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-10-02"))[2026 · 10 · 02]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[别只看 Agent 的最后一句话]

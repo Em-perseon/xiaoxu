@@ -9,6 +9,7 @@
 = 课程笔记
 
 #html.elem("nav", attrs: (class: "section-index", aria-label: "课程专题"))[
+  #html.elem("a", attrs: (href: "ai-and-management-research/"))[#html.elem("span")[人工智能与经管研究] #html.elem("b")[→]]
   #html.elem("a", attrs: (href: "advanced-econometrics/"))[#html.elem("span")[高级计量经济学] #html.elem("b")[→]]
   #html.elem("a", attrs: (href: "advanced-microeconomics/"))[#html.elem("span")[高级微观经济学] #html.elem("b")[→]]
 ]
