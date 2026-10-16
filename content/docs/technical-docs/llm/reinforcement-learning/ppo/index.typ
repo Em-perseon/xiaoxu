@@ -231,20 +231,14 @@ $ V_t^"targ" = hat(A)_t + V_(theta_"old")(s_t) $
 
 原图中的伪代码可写成：
 
-```text
-Algorithm 1: PPO, Actor-Critic Style
+*算法 1：Actor-Critic 形式的 PPO。* 在每一轮迭代中：
 
-for iteration = 1, 2, ... do
-    for epoch = 1, 2, ..., N do
-        Run policy pi_(theta old) in environment for T timesteps
-        Compute advantage estimates hat(A)_1, ..., hat(A)_T
-    end for
+1. 由 $N$ 个采样者分别运行旧策略 $pi_(theta_"old")$，各收集 $T$ 个时间步的数据。
+2. 计算各时间步的优势估计 $hat(A)_1, ..., hat(A)_T$。
+3. 使用大小为 $M <= N T$ 的 minibatch，对参数 $theta$ 优化代理目标 $L$，重复 $K$ 个训练 epoch。
+4. 同步旧策略参数，进入下一轮采样：
 
-    Optimize surrogate L with respect to theta,
-    using K epochs and minibatch size M <= N T
-    theta old <- theta
-end for
-```
+   $ theta_"old" arrow.l theta $
 
 原图将内层循环标为 “actor”，这里按 PPO 训练含义改写为 “epoch”：内层循环重复利用已采集 rollout 做多轮 minibatch 更新，而不是重新定义一个 Actor 网络。
 

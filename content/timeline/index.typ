@@ -10,6 +10,14 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-10-16"))[2026 · 10 · 16]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[优化强化学习与课程笔记排版]
+      #html.elem("p")[完善 Actor-Critic、PPO、OPD 和人工智能与经管研究笔记的公式、步骤说明与示例排版。]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-10-15"))[2026 · 10 · 15]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[Actor-Critic 更新动画]

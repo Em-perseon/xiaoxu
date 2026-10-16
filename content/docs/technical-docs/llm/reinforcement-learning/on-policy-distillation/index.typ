@@ -26,14 +26,13 @@ $ pi_"T"(dot | s_t) = pi_"T"(dot | q, o_<t) $
 
 例如，一个关于 $sqrt(2)$ 无理性的证明，student 已写出：
 
-```text
-Prompt：证明 sqrt(2) 是无理数。
+*Prompt：* 证明 $sqrt(2)$ 是无理数。
 
 Student 的草稿：
-1. 假设 sqrt(2) = p / q。
-2. 两边平方，得到 p² = 2q²。
+
+1. 假设 $sqrt(2) = p / q$。
+2. 两边平方，得到 $p^2 = 2q^2$。
 3. 接下来……
-```
 
 teacher 在第三步看到的仍然是这份 student 草稿，而不是自己重新生成的完整证明。它可以在这个前缀下给后续 token 分配概率，例如更倾向讨论奇偶性、互质条件与矛盾。
 
@@ -139,20 +138,17 @@ $ hat(A)_t^"OPD" = log pi_"T"(o_t | s_t) - log pi_"old"(o_t | s_t) $
 
 以下数值仅作示意：
 
-```text
-某个固定前缀下，Student 采样了 token a。
+*示例一：采样到 token $a$。* 在同一个固定前缀下，Student 的概率为 $P_"student"(a) = 0.10$，Teacher 的概率为 $P_"teacher"(a) = 0.40$。使用自然对数，权重为：
 
-Student：P(a) = 0.10
-Teacher：P(a) = 0.40
-权重：log(0.40) - log(0.10) = log(4) ≈ +1.386
-局部梯度倾向提高 Student 对 a 的概率。
+$ w_a = ln(0.40) - ln(0.10) = ln(4) approx +1.386 $
 
-另一个 token b：
-Student：P(b) = 0.30
-Teacher：P(b) = 0.05
-权重：log(0.05) - log(0.30) = log(1/6) ≈ -1.792
-局部梯度倾向降低 Student 对 b 的概率。
-```
+正权重使局部梯度倾向提高 Student 对 $a$ 的概率。
+
+*示例二：采样到 token $b$。* Student 的概率为 $P_"student"(b) = 0.30$，Teacher 的概率为 $P_"teacher"(b) = 0.05$，权重为：
+
+$ w_b = ln(0.05) - ln(0.30) = ln(1 / 6) approx -1.792 $
+
+负权重使局部梯度倾向降低 Student 对 $b$ 的概率。
 
 teacher 对某个 token 给出很高概率并不足以决定更新方向，还要比较 student 原本的概率。两者概率一样时，这种权重为零。
 

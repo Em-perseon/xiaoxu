@@ -15,8 +15,6 @@
   loading: "lazy",
 ))[]
 
-#link("/xiaoxu/assets/actor-critic/index.html")[单独打开动画 →]
-
 动画为简化教学模型，具体计算与 PPO 的区别见动画下方“看完再看原理”。
 
 #outline(title: [目录], depth: 3)
@@ -59,24 +57,14 @@ $ V_phi(s_t) $
 
 以 Search Agent 为例，一条高层 trajectory 可以写成：
 
-```text
-s_0: 用户问题
-
-a_1: search("Nobel physics 2023")
-s_1: 搜索结果
-
-a_2: read(document)
-s_2: 读取到候选资料
-
-a_3: 生成答案 "Pierre Agostini"
-s_3: 结束
-```
+- 初始状态 $s_0$：用户问题。
+- 动作 $a_1$：调用 `search("Nobel physics 2023")`；进入状态 $s_1$，获得搜索结果。
+- 动作 $a_2$：调用 `read(document)`；进入状态 $s_2$，读取到候选资料。
+- 动作 $a_3$：生成答案 “Pierre Agostini”；进入终止状态 $s_3$。
 
 最终 verifier 判断答案正确，并给出：
 
-```text
-reward = 1
-```
+$ R = 1 $
 
 在这个例子中，中间的搜索和阅读步骤没有即时的外部 reward，唯一明确的任务奖励出现在 trajectory 末端。这就是 LLM agent 训练中的 delayed reward。
 
@@ -88,19 +76,11 @@ $ G_t = sum_(k=t)^T gamma^(k-t) r_k $
 
 如果只有最后一步有 reward：
 
-```text
-r_1 = 0
-r_2 = 0
-r_3 = 1
-```
+$ r_1 = 0, quad r_2 = 0, quad r_3 = 1 $
 
 并且暂时取 $gamma = 1$，则：
 
-```text
-G_1 = 1
-G_2 = 1
-G_3 = 1
-```
+$ G_1 = G_2 = G_3 = 1 $
 
 也就是说，每个时间步都获得了“这条 trajectory 最终成功了”这一训练目标。若 $gamma < 1$，则更早的动作会受到更强的折扣。例如末端 reward 位于时间步 $T$ 时：
 
@@ -120,19 +100,17 @@ $ L_"critic"(phi) = 1 / 2 (V_phi(s_t) - G_t)^2 $
 
 例如，某条成功 trajectory 中不同状态的 Critic 预测为：
 
-```text
-state  s_0:  V_phi(s_0) = 0.2,  G_0 = 1
-state  s_1:  V_phi(s_1) = 0.5,  G_1 = 1
-state  s_2:  V_phi(s_2) = 0.8,  G_2 = 1
-```
+- 状态 $s_0$：$V_phi(s_0) = 0.2$，实际回报 $G_0 = 1$。
+- 状态 $s_1$：$V_phi(s_1) = 0.5$，实际回报 $G_1 = 1$。
+- 状态 $s_2$：$V_phi(s_2) = 0.8$，实际回报 $G_2 = 1$。
 
 Critic 会通过价值损失逐步把这些预测推向真实 return：
 
-```text
-V_phi(s_0): 0.2 -> 0.4
-V_phi(s_1): 0.5 -> 0.7
-V_phi(s_2): 0.8 -> 0.9
-```
+- $V_phi(s_0)$：$0.2 arrow.r 0.4$。
+- $V_phi(s_1)$：$0.5 arrow.r 0.7$。
+- $V_phi(s_2)$：$0.8 arrow.r 0.9$。
+
+这里的数值仅示意预估向目标靠近，并非一次固定学习率更新的计算结果。
 
 它最终希望学会：哪些状态通常意味着任务更可能成功，哪些状态已经偏离了正确轨迹。实际 LLM PPO 通常使用 GAE 或 bootstrapped return，而不是完全依赖 Monte Carlo return；但“Critic 拟合价值目标”的角色不变。
 
@@ -146,23 +124,27 @@ $ A_t = G_t - V_phi(s_t) $
 
 例如：
 
-```text
-Step 1
-状态：我是否应该搜索？
-Critic：V_phi(s_1) = 0.3
-最终结果：答案正确，G_1 = 1
-优势：A_1 = 1 - 0.3 = +0.7
-```
+*Step 1：我是否应该搜索？*
+
+- 当前状态：尚未搜索，正在决定下一步动作。
+- Critic 的预估：$V_phi(s_1) = 0.3$。
+- 最终结果：答案正确，实际回报 $G_1 = 1$。
+
+因此，这一步的优势为：
+
+$ A_1 = G_1 - V_phi(s_1) = 1 - 0.3 = +0.7 $
 
 这说明 `search()` 这个动作带来的结果比当前 Critic 的预期好，Actor 应该提高类似动作的概率。
 
-```text
-Step 2
-状态：已经找到资料
-Critic：V_phi(s_2) = 0.95
-最终结果：答案正确，G_2 = 1
-优势：A_2 = 1 - 0.95 = +0.05
-```
+*Step 2：已经找到资料。*
+
+- 当前状态：已有相关资料，准备继续作答。
+- Critic 的预估：$V_phi(s_2) = 0.95$。
+- 最终结果：答案正确，实际回报 $G_2 = 1$。
+
+因此，这一步的优势为：
+
+$ A_2 = G_2 - V_phi(s_2) = 1 - 0.95 = +0.05 $
 
 这个动作虽然出现在成功 trajectory 中，但它没有特别超出预期，因此更新幅度应该较小。
 
@@ -209,14 +191,12 @@ $
 
 LLM 的 response 是由一连串 token action 组成的。例如：
 
-```text
-回答：The answer is 42
+回答为 “The answer is 42”，示意性地划分为以下 token（实际划分取决于 tokenizer）：
 
-t_1: "The"
-t_2: " answer"
-t_3: " is"
-t_4: "42"
-```
+- $t_1$：`"The"`。
+- $t_2$：`" answer"`。
+- $t_3$：`" is"`。
+- $t_4$：`"42"`。
 
 最终 verifier 给出 reward=1。对每个 token，PPO 会保存其状态、动作、旧策略 log probability、价值预测和 advantage，然后在 token 维度上累积 Actor loss：
 
@@ -228,12 +208,9 @@ $
 
 因此，计算过程看起来像：
 
-```text
-token 1 loss
-+ token 2 loss
-+ token 3 loss
-+ token 4 loss
-```
+$ L_"actor" = 1 / 4 (ell_1 + ell_2 + ell_3 + ell_4), quad ell_t = -hat(A)_t log pi_theta(o_t | q, o_<t) $
+
+其中 $ell_t$ 是第 $t$ 个 token 对应的损失项，这里对四个 token 取平均。
 
 在真正的 LLM PPO 实现中，通常还会加入 per-token KL 惩罚、padding mask、GAE 和 minibatch 平均。若只有 terminal task reward，那么早期 token 得到的信号主要来自最终 return；若同时加入 KL shaping，则每个 token 还会得到与参考模型偏离程度相关的 reward。
 
@@ -241,26 +218,21 @@ token 1 loss
 
 如果没有 Critic，所有成功 trajectory 都可能只得到同一个 reward：
 
-```text
-成功 trajectory：reward = 1
-其中所有 action：更新信号都近似为 +1
-```
+成功 trajectory 的奖励为 $R = 1$。在无 baseline、无中间奖励且 $gamma = 1$ 的简化情形下，每个动作的策略梯度都用相同的回报 $G_t = 1$ 加权。
 
 这种信号太粗糙。Critic 引入了一个状态相关的 baseline，把问题从“成功了吗”变成“结果比当前状态原本预期的结果好多少”。
 
-假设有两个 action：
+假设在两个不同状态下，分别采样了“搜索”和“直接猜”这两个动作：
 
-```text
-Action A：搜索
-Critic 预测成功概率：0.9
-最终成功：G = 1
-Advantage：+0.1
+*Action A：搜索。* 当前状态的 Critic 预估为 $0.9$，最终成功、实际回报为 $1$：
 
-Action B：直接猜
-Critic 预测成功概率：0.1
-最终成功：G = 1
-Advantage：+0.9
-```
+$ A_"搜索" = 1 - 0.9 = +0.1 $
+
+*Action B：直接猜。* 另一个状态的 Critic 预估为 $0.1$，最终也成功、实际回报为 $1$：
+
+$ A_"直接猜" = 1 - 0.1 = +0.9 $
+
+这里比较的是不同状态下的经历；同一个状态的 $V_phi(s)$ 不会因准备选择哪个动作而改变。
 
 两条 trajectory 都成功，但 PPO 会更强烈地奖励 Action B，因为它带来了超出预期更多的结果。这里的数值只是示意；实际 Critic 预测的是价值而不一定是严格意义上的成功概率。
 
@@ -268,9 +240,7 @@ Advantage：+0.9
 
 即使有了 Critic，PPO 也不一定知道一条成功 trajectory 中究竟是哪一个 action 导致了成功。它更直接得到的是：
 
-```text
-这一整条路径最终成功的可能性更高
-```
+这一条采样路径最终成功了，但这不等于其中每一步都有正面的因果贡献。
 
 如果 trajectory 是：
 
@@ -293,24 +263,18 @@ search A
 
 PPO 的训练信号可以概括为：
 
-```text
-terminal reward
-       |
-       v
-计算 return G_t
-       |
-       v
-Critic 预测 V_phi(s_t)
-       |
-       v
-advantage = G_t - V_phi(s_t)
-       |
-       +-----------------------------+
-       v                             v
-Actor：                         Critic：
-优势为正，提高 action 概率       让 V_phi 更接近真实 return
-优势为负，降低 action 概率
-```
+1. 从最终奖励及中间奖励计算每一步的回报 $G_t$。
+2. 用 Critic 的旧预估 $V_phi(s_t)$ 作为 baseline，计算优势：
+
+   $ A_t = G_t - V_phi(s_t) $
+
+3. *Actor 更新*：用优势加权策略损失，正优势推动已采样动作的概率上升，负优势则相反：
+
+   $ L_"actor"(theta) = -A_t log pi_theta(a_t | s_t) $
+
+4. *Critic 更新*：拟合回报目标，缩小预测误差：
+
+   $ L_"critic"(phi) = 1 / 2 (V_phi(s_t) - G_t)^2 $
 
 所以，PPO 并不是把 reward 直接“传回”每一个 token，而是通过 value function 建立每一步的评价，再用 advantage 指导 Actor 更新、用 return 训练 Critic。对于 LLM，action 是 token；对于 Search Agent，action 还可以是 search、read 和 answer 等高层工具调用。无论 action 粒度如何，核心机制都是相同的。
 
