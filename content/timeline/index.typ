@@ -10,6 +10,15 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-10-30"))[2026 · 10 · 30]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[这是一个很好的时代，这也是一个很坏的时代]
+      #html.elem("p")[从初识 ChatGPT 到用 AI 辅助科研，记录便利、感触与时代变化中的焦虑。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/best-and-worst-of-times/")[阅读文章 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-10-16"))[2026 · 10 · 16]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[优化强化学习与课程笔记排版]
