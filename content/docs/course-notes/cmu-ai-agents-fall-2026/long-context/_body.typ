@@ -1,6 +1,6 @@
 #import "_notes.typ": course-note
 
-== 一、这节课究竟在解决什么问题？
+== 一、长程 Agent 为什么需要上下文管理？
 
 *核心问题：当 Agent 需要执行几百、几千步操作时，如何让它既能利用漫长的历史信息，又不至于耗费过高的推理成本？*
 
@@ -9,7 +9,7 @@
 - *Capacity（容量）*：模型的上下文窗口足够长，并不意味着它真正能够识别、检索和利用早期的重要信息。
 - *Efficiency（效率）*：即使模型能够处理足够长的上下文，重复读取历史也会带来推理延迟、计算成本和内存压力。
 
-Neubig 的解决思路可以归纳为：
+长上下文管理可以分为模型与执行框架两个层面：
 
 #html.elem("div", attrs: (class: "essay-main-image"))[
   #image("images/chat-system-stack.svg", width: 100%, alt: "历史增长后，Model 与 Harness 两层并列提供优化，共同支持低成本、稳定的长程 Agent。")
@@ -18,8 +18,6 @@ Neubig 的解决思路可以归纳为：
 这里最重要的区分是：*让模型支持 100 万 token，与让 Agent 在长程任务中持续做出正确决策，是两个不同的研究目标。*
 
 == 二、为什么 Agent 的上下文成本增长得这么快？
-
-对应 PPT 第 2–5 页
 
 普通聊天可能只需要几轮交互，但 Agent 的每一步通常都会产生：
 
@@ -42,13 +40,13 @@ Neubig 的解决思路可以归纳为：
 
 === OpenHands 的真实数据
 
-Neubig 分析了 1,500 个 OpenHands session，平均每个 session 涉及约 77,922 tokens。
+一组包含 1,500 个 OpenHands session 的统计中，每个 session 平均涉及约 77,922 tokens。
 
 #html.elem("div", attrs: (class: "essay-main-image"))[
   #image("images/chat-context-composition.svg", width: 100%, alt: "OpenHands 上下文组成：工具返回 37%，系统与工具定义 23%，工具调用 20%，用户输入 9%，推理 9%，最终回复 2%。")
 ]
 
-图：OpenHands 上下文组成（课件第 4 页）。
+图：OpenHands 上下文组成；工具调用与工具返回占据了主要部分。
 
 其中工具调用和工具结果合计占到 *57%*。
 
@@ -56,9 +54,7 @@ Neubig 分析了 1,500 个 OpenHands session，平均每个 session 涉及约 77
 
 == 三、LLM 推理是怎样处理长上下文的？
 
-对应 PPT 第 6–11 页
-
-课程首先介绍了两个关键阶段：
+LLM 推理分为输入处理与逐 token 生成两个阶段：
 
 #html.elem("div", attrs: (class: "essay-main-image"))[
   #image("images/chat-inference-cards.svg", width: 100%, alt: "Prefill 与 Decode 并列对比：输入处理与输出生成，计算密集与顺序带宽限制。")
@@ -75,11 +71,9 @@ Neubig 分析了 1,500 个 OpenHands session，平均每个 session 涉及约 77
 
 == 四、四种长上下文模型技术
 
-对应 PPT 第 12–25 页
-
 标准 Transformer 的全局 Attention 通常需要进行 $O(n^2)$ 级别的 token 间比较。上下文长度增大后，计算和 KV 存储成为瓶颈。#course-note("n3")
 
-课程介绍了四类常见技术。
+降低长上下文开销的常见技术有四类。
 
 #table(columns: 3,
 [技术], [核心思路], [主要问题],
@@ -111,7 +105,7 @@ $ S_t = S_(t-1) + k_t v_t^T $
 
 它与 RNN 的思路存在相似之处：#course-note("n5")*历史被逐步写入一个固定大小的内部状态。*
 
-课程还介绍了它的几个发展版本：
+状态更新机制可以进一步加入误差纠正和遗忘：
 
 (Linear) 简单累积历史信息，但容易出现信息干扰。
 
@@ -133,7 +127,7 @@ Sparse Attention 的思路是：并不是所有历史 token 都必须相互计�
 
 它可以使用固定模式，也可以根据当前 Query 动态挑选 Top-K 相关 token。
 
-而 KV Compression 并不一定减少需要关注的历史位置，而是压缩保留每个位置所需的状态。课程讲到了 GQA 和 DeepSeek 使用的 MLA 等方案。
+而 KV Compression 并不一定减少需要关注的历史位置，而是压缩保留每个位置所需的状态。GQA 和 MLA 是两种减少 KV 存储成本的方案。
 
 *这里可以区分两个不同的问题：信息是否被选中，以及信息以多大代价被保存。*
 
@@ -141,13 +135,11 @@ Sparse Attention 的思路是：并不是所有历史 token 都必须相互计�
 
 == 五、为什么有 1M Context Window，也不代表模型真正理解 1M？
 
-对应 PPT 第 26–36 页
-
-Neubig 强调，模型拥有足够的计算能力之后，还需要学会如何利用远距离信息。
+具备处理长序列的计算能力，还不等于学会了利用远距离信息。
 
 === 5.1 Position Encoding
 
-课程比较了以下方法：
+位置表示与长度扩展有以下几种方法：
 
 #table(columns: 2,
 [方法], [主要思想],
@@ -164,7 +156,7 @@ Neubig 强调，模型拥有足够的计算能力之后，还需要学会如何�
 
 === 5.2 长上下文训练
 
-课程给出的训练路线是：
+一种渐进式训练路线是：
 
 #html.elem("div", attrs: (class: "essay-main-image"))[
   #image("images/chat-training.svg", width: 100%, alt: "从短序列预训练到长任务适配。")
@@ -176,11 +168,9 @@ Neubig 强调，模型拥有足够的计算能力之后，还需要学会如何�
 
 真正有效的长上下文数据，需要具有长距离依赖关系，例如代码库中的跨文件关联、多阶段 Agent 轨迹，或需要结合早期证据才能完成的任务。
 
-课程也介绍了 Context Parallelism：将长上下文计算分配到多块设备上，缓解单设备内存限制，但不自动消除完整 Attention 的总计算量。
+Context Parallelism 将计算沿上下文维度分配到多个设备：将长上下文计算分配到多块设备上，缓解单设备内存限制，但不自动消除完整 Attention 的总计算量。
 
 == 六、Prompt Caching：Agent 工程中最直接的优化
-
-对应 PPT 第 37–44 页
 
 这是最值得 Agent 开发者掌握的部分之一。
 
@@ -198,7 +188,7 @@ Agent 的系统指令、工具定义和早期历史在相邻调用中通常是�
 
 *KV Cache* 是注意力计算保存 Key、Value 状态的机制；*Prompt Caching* 是跨请求复用相同 Prompt 前缀的计算结果。二者相关，但不能完全视为同一概念。#course-note("n9")
 
-课程展示的当时多家模型 API 定价中，命中的缓存输入 token 价格经常只有普通输入 token 的约十分之一。但具体价格和缓存保留时间取决于提供商。
+缓存命中的输入通常采用较低的计费价格，因此稳定前缀既可能减少重复计算，也可能降低调用费用。折扣比例、缓存写入费用与保留时间取决于提供商和计费方案。
 
 === 一个非常容易被忽视的工程问题
 
@@ -236,11 +226,9 @@ Available tools: ...
 
 == 七、Context Compaction：长程 Agent 的状态管理
 
-对应 PPT 第 45–51 页
-
 当 Context Window 快满时，很多 Agent 会对历史进行压缩，例如将几十轮工具调用总结成一小段文字。#course-note("n11")
 
-但是教授提出了一个更有意义的理解：
+压缩的目标是保留继续执行所需的工作状态：
 
 *Compaction 不只是 Summarization，而应当被看作 State Estimation（状态估计）。*
 
@@ -270,7 +258,7 @@ $ p(A_"future" | H_t) approx p(A_"future" | hat(s)_t) $
 
 === 7.2 到底应该保留什么？
 
-课程推荐按信息的性质来处理，而不是统一摘要。
+不同信息应采用不同保留策略，不能用同一种摘要方式处理所有历史。
 
 #table(columns: 2,
 [信息类别], [处理方式],
@@ -289,7 +277,7 @@ $ p(A_"future" | H_t) approx p(A_"future" | hat(s)_t) $
 
 === 7.3 Repeated Compaction Drift
 
-课程还讲了一个非常典型的失败现象。
+反复压缩可能逐步抹去原本精确的约束。
 
 #html.elem("div", attrs: (class: "essay-main-image"))[
   #image("images/chat-compaction-drift.svg", width: 100%, alt: "反复压缩让精确 CUDA 版本约束逐步丢失。")
@@ -317,7 +305,7 @@ OpenHands 的早期压缩经验值得注意：压缩方案在 SWE-bench 上节�
 
 == 八、对长程 Agent 与调度研究的启发
 
-结合我关注的长程 Agent、Jev 调度和 Agent Memory 方向，这一讲至少提供了一个值得借鉴的思路。
+结合我关注的长程 Agent、Jev 调度和 Agent Memory 方向，可以考虑按信息对未来决策的价值来组织历史。
 
 === 1. 历史信息不应该全部等价对待
 
@@ -353,13 +341,13 @@ OpenHands 的早期压缩经验值得注意：压缩方案在 SWE-bench 上节�
 
 不过需要强调：上下文管理主要解决信息保存与利用问题，并不直接解决我关注的 *myopic decision-making*。即便信息完全正确，Agent 仍可能只追求即时回报。要解决短视行为，还需要显式引入长期价值估计、规划或其他前瞻性决策机制。
 
-=== 3. 这节课可以延伸出一个技术问题
+=== 3. 一个值得研究的技术问题
 
 *How can an agent compress long interaction histories while preserving decision-relevant information for future actions?*
 
 这一问题还需要结合已有 CS 研究排查创新空间，但很适合作为评估 Agent Memory、Context Compaction 与长期任务表现之间关系的起点。
 
-== 九、最后总结：这节课最值得记住的五个结论
+== 九、长上下文管理的五个关键结论
 
 *Context Window 大，不等于有效记忆好。*
 
@@ -381,11 +369,11 @@ OpenHands 的早期压缩经验值得注意：压缩方案在 SWE-bench 上节�
 
 摘要质量与后续任务成功率不等价，反复压缩更需要检查长期稳定性。
 
-*整节课的核心思想可以概括成一句话：*
+*长程 Agent 的核心目标是：*
 
 长程 Agent 的关键不只是拥有更长的 Context，而是通过模型架构与 Harness 设计，经济、准确且持续地保留和利用对未来任务有价值的信息。
 
-建议延伸阅读：MemGPT、LongLLMLingua、ReSum。课程下一讲进一步讨论跨任务的 Memory 与 Skills，与本讲的单次长上下文管理相互衔接。
+可进一步阅读 MemGPT、LongLLMLingua 与 ReSum。单次任务中的上下文管理关注如何保留当前工作状态；跨任务的 Memory 与 Skills 则关注哪些经验可以长期复用。
 
 == 课后自测
 

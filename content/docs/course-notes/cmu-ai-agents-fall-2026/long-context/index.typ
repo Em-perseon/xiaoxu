@@ -29,3 +29,6 @@
 #outline(title: [目录], depth: 2)
 
 #include "_body.typ"
+
+#html.elem("link", attrs: (rel: "stylesheet", href: "/xiaoxu/assets/course-notes/image-viewer.css"))
+#html.elem("script", attrs: (src: "/xiaoxu/assets/course-notes/image-viewer.js", defer: ""))[]

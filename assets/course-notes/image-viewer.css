@@ -1,0 +1,86 @@
+.course-image-trigger {
+  display: block;
+  width: 100%;
+  margin: .6rem 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+.course-image-trigger:focus-visible { outline: 2px solid #3974aa; outline-offset: 4px; }
+.course-image-trigger::after {
+  content: '点击放大 ↗';
+  display: block;
+  margin-top: .35rem;
+  color: #456582;
+  font-size: .85rem;
+  text-align: right;
+}
+.course-image-viewer {
+  box-sizing: border-box;
+  width: 96vw;
+  max-width: 1800px;
+  height: 94vh;
+  max-height: 94dvh;
+  padding: 0;
+  border: 1px solid #cbd5df;
+  border-radius: 12px;
+  background: #fffff8;
+  color: #243247;
+}
+.course-image-viewer[open] { display: flex; flex-direction: column; }
+.course-image-viewer::backdrop { background: rgb(0 0 0 / 75%); }
+.course-image-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .7rem 1rem;
+  border-bottom: 1px solid #dce2e7;
+  flex: none;
+}
+.course-image-toolbar span { margin-right: auto; }
+.course-image-toolbar button {
+  font: inherit;
+  padding: .45rem .8rem;
+  border: 1px solid #b8c6d2;
+  border-radius: 6px;
+  background: white;
+  color: #243247;
+  cursor: pointer;
+}
+.course-image-stage {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.course-image-stage img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.course-image-stage.is-zoomed { display: block; }
+.course-image-stage.is-zoomed img { max-width: none; max-height: none; margin: 0 auto; }
+.course-image-viewer .course-image-caption {
+  box-sizing: border-box;
+  flex: none;
+  width: 100%;
+  padding: .6rem 1rem;
+  margin: 0;
+  font-size: .95rem;
+  line-height: 1.4;
+  border-top: 1px solid #dce2e7;
+}
+@media (max-width: 600px) {
+  .course-image-toolbar { gap: .4rem; padding: .5rem; }
+  .course-image-toolbar span { font-size: .9rem; }
+  .course-image-toolbar button { font-size: .9rem; padding: .5rem; }
+  .course-image-stage { padding: .4rem; }
+}

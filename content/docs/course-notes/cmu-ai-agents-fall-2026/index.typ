@@ -13,5 +13,6 @@
 #link("https://www.cmu-agents.com/#/schedule")[课程日程与材料 →]
 
 #html.elem("nav", attrs: (class: "section-index", aria-label: "课程学习笔记"))[
+  #html.elem("a", attrs: (href: "tool-use/"))[#html.elem("span")[Lecture 2 · 语言模型智能体的工具使用] #html.elem("b")[08 · 27　→]]
   #html.elem("a", attrs: (href: "long-context/"))[#html.elem("span")[Lecture 3 · 长上下文智能体的上下文管理] #html.elem("b")[09 · 01　→]]
 ]
