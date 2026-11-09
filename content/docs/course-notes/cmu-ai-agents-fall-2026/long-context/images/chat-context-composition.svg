@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="450" viewBox="0 0 1000 450">
+<rect width="1000" height="450" fill="#fffff8"/>
+<g font-family="PingFang SC, sans-serif" fill="#243247">
+<text x="30" y="42" font-size="26">OpenHands Agent 上下文组成</text>
+<text x="30" y="75" font-size="17">1,500 个 session · 平均 77,922 tokens / session</text>
+<text x="30" y="130" font-size="20">工具返回</text>
+<rect x="245" y="105" width="592" height="32" rx="4" fill="#3974aa"/>
+<text x="847" y="129" font-size="19">37%</text>
+<text x="30" y="178" font-size="20">系统提示与工具定义</text>
+<rect x="245" y="153" width="368" height="32" rx="4" fill="#3974aa"/>
+<text x="623" y="177" font-size="19">23%</text>
+<text x="30" y="226" font-size="20">工具调用</text>
+<rect x="245" y="201" width="320" height="32" rx="4" fill="#3974aa"/>
+<text x="575" y="225" font-size="19">20%</text>
+<text x="30" y="274" font-size="20">用户输入</text>
+<rect x="245" y="249" width="144" height="32" rx="4" fill="#3974aa"/>
+<text x="399" y="273" font-size="19">9%</text>
+<text x="30" y="322" font-size="20">内部推理</text>
+<rect x="245" y="297" width="144" height="32" rx="4" fill="#3974aa"/>
+<text x="399" y="321" font-size="19">9%</text>
+<text x="30" y="370" font-size="20">最终回复</text>
+<rect x="245" y="345" width="32" height="32" rx="4" fill="#3974aa"/>
+<text x="287" y="369" font-size="19">2%</text>
+<text x="30" y="425" font-size="17">工具调用 + 工具返回 = 57% · 课件第 4 页</text>
+</g></svg>
