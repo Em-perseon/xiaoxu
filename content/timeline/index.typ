@@ -12,6 +12,15 @@
   #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-11-09"))[2026 · 11 · 09]
     #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[CMU AI Agents · 第一次作业]
+      #html.elem("p")[建立 Agent Harness 作业仓库与介绍页，整理 ReAct 循环、代码修复、上下文压缩和下棋智能体的任务关系，准备记录实现过程与对照实验。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/course-notes/cmu-ai-agents-fall-2026/assignment-1/")[查看作业介绍 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-11-09"))[2026 · 11 · 09]
+    #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[CMU AI Agents · 工具使用]
       #html.elem("p")[新增 Lecture 2 笔记，梳理工具调用、CodeAct、结构化输出、MCP、凭证管理与并行执行，配合图解和可展开的边注；边注图片支持点击放大。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/course-notes/cmu-ai-agents-fall-2026/tool-use/")[阅读工具使用笔记 →]]
