@@ -22,6 +22,8 @@
 .course-note-detail summary { cursor: pointer; font-weight: 600; line-height: 1.5; }
 .course-note-content { max-height: 65vh; overflow: auto; padding: .4rem .2rem; }
 .course-note-content figure, .course-note-content img { max-width: 100%; }
+.course-note-figure { margin: 1rem 0; }
+.course-note-caption { margin-top: .35rem; font-size: .85rem; line-height: 1.6; }
 .course-note-content ul, .course-note-content ol { width: auto; padding-left: 1.3em; font-size: inherit; }
 .course-note-content .essay-main-image { width: 100%; margin: .6rem 0; }
 ]
