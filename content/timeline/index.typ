@@ -10,6 +10,24 @@
 
 #html.elem("div", attrs: (class: "timeline"))[
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-11-09"))[2026 · 11 · 09]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[CMU AI Agents · 工具使用]
+      #html.elem("p")[新增 Lecture 2 笔记，梳理工具调用、CodeAct、结构化输出、MCP、凭证管理与并行执行，配合图解和可展开的边注；边注图片支持点击放大。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/course-notes/cmu-ai-agents-fall-2026/tool-use/")[阅读工具使用笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-11-09"))[2026 · 11 · 09]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[CMU AI Agents · 长上下文管理]
+      #html.elem("p")[新增 Lecture 3 笔记，从模型与 Harness 两层梳理长上下文训练、KV Cache、前缀复用、上下文压缩与长程任务评估，补充图表和推导边注。]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/docs/course-notes/cmu-ai-agents-fall-2026/long-context/")[阅读长上下文笔记 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-10-30"))[2026 · 10 · 30]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[这是一个很好的时代，这也是一个很坏的时代]
