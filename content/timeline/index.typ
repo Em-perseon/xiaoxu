@@ -18,6 +18,14 @@
   ]
 
   #html.elem("article", attrs: (class: "timeline-item"))[
+    #html.elem("time", attrs: (datetime: "2026-11-19"))[2026 · 11 · 19]
+    #html.elem("div", attrs: (class: "timeline-content"))[
+      #html.elem("h3")[做实验有感]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/inspiration-from-experiments/")[阅读文章 →]]
+    ]
+  ]
+
+  #html.elem("article", attrs: (class: "timeline-item"))[
     #html.elem("time", attrs: (datetime: "2026-11-09"))[2026 · 11 · 09]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[CMU AI Agents · 工具使用]

@@ -709,6 +709,23 @@ figure > table {
     border-radius: 4px;
 }
 
+.blog-wide-image {
+    box-sizing: border-box;
+    width: min(88%, 68rem);
+    max-width: none;
+    margin: 1.6rem 0 2rem;
+}
+
+.blog-wide-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    border: 1px solid rgba(90, 90, 90, 0.22);
+    border-radius: 8px;
+    background: #fff;
+}
+
 .agent-eval-figure {
     box-sizing: border-box;
     width: min(92%, 76rem);
@@ -1031,7 +1048,8 @@ figure[role="math"] > svg {
         border-left: 0;
     }
 
-    .essay-main-image {
+    .essay-main-image,
+    .blog-wide-image {
         width: 100%;
     }
 

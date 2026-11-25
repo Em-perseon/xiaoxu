@@ -10,6 +10,7 @@
 
 #html.elem("nav", attrs: (class: "section-index", aria-label: "博客文章"))[
   #html.elem("a", attrs: (href: "first-steps-in-design-science-research/"))[#html.elem("span")[初入 Design Science Research 有感] #html.elem("b")[2026 · 11 · 25　→]]
+  #html.elem("a", attrs: (href: "inspiration-from-experiments/"))[#html.elem("span")[做实验有感] #html.elem("b")[2026 · 11 · 19　→]]
   #html.elem("a", attrs: (href: "best-and-worst-of-times/"))[#html.elem("span")[这是一个很好的时代，这也是一个很坏的时代] #html.elem("b")[2026 · 10 · 29　→]]
   #html.elem("a", attrs: (href: "agent-evaluation-harness/"))[#html.elem("span")[别只看 Agent 的最后一句话] #html.elem("b")[2026 · 10 · 02　→]]
   #html.elem("a", attrs: (href: "2026-06-25-discussion/"))[#html.elem("span")[一次讨论] #html.elem("b")[2026 · 06 · 25　→]]
