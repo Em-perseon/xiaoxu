@@ -532,6 +532,42 @@ article nav[role="doc-toc"] li {
     margin: 0;
 }
 
+.prompt-box {
+    box-sizing: border-box;
+    width: 55%;
+    max-width: 55%;
+    margin: 1.35rem 0 1.65rem;
+    padding: 1.05rem 1.25rem;
+    border: 1px solid rgba(76, 88, 104, 0.32);
+    border-left: 3px solid rgba(76, 88, 104, 0.72);
+    border-radius: 6px;
+    background: rgba(241, 244, 247, 0.65);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.78) inset;
+    color: #28323b;
+}
+
+.prompt-box p {
+    width: auto;
+    max-width: none;
+    margin: 0.6rem 0 0;
+    font-size: 1.12rem;
+    line-height: 1.75;
+}
+
+.prompt-box p:first-child {
+    margin-top: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .prompt-box {
+        border-color: rgba(190, 202, 216, 0.34);
+        border-left-color: rgba(190, 202, 216, 0.72);
+        background: rgba(35, 42, 50, 0.9);
+        box-shadow: none;
+        color: #e3e9ef;
+    }
+}
+
 .rrf-example,
 .graph-rag-guide,
 .refrag-agent-box,
@@ -1000,12 +1036,14 @@ figure[role="math"] > svg {
     }
 
     .writing-note,
+    .prompt-box,
     .rrf-example,
     .graph-rag-guide,
     .refrag-agent-box,
     .router-policy-box,
     .rag-failure-box {
         width: 100%;
+        max-width: 100%;
     }
 
     .section-index,

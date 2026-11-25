@@ -13,7 +13,6 @@
     #html.elem("time", attrs: (datetime: "2026-11-25"))[2026 · 11 · 25]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[初入 Design Science Research 有感]
-      #html.elem("p")[记录初识 theory-driven Design Science Research 的转变与感悟：从最初觉得“套皮”，到理解“现实现象—理论解释—设计方针—技术实现”这套设计框架的长期价值。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/first-steps-in-design-science-research/")[阅读文章 →]]
     ]
   ]
