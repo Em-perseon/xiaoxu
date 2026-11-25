@@ -201,7 +201,7 @@
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[一次讨论]
       #html.elem("p")[记录一段值得留下的讨论。]
-      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/essays/2026-06-25-discussion/")[阅读随笔 →]]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/2026-06-25-discussion/")[阅读随笔 →]]
     ]
   ]
 
@@ -210,7 +210,7 @@
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[生病小记]
       #html.elem("p")[一篇关于生病与生活状态的短记。]
-      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/essays/2026-06-23-throatache/")[阅读随笔 →]]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/2026-06-23-throatache/")[阅读随笔 →]]
     ]
   ]
 
@@ -219,7 +219,7 @@
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[实验小记]
       #html.elem("p")[记录实验过程中的片段与想法。]
-      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/essays/2026-06-01-experiment-notes/")[阅读随笔 →]]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/2026-06-01-experiment-notes/")[阅读随笔 →]]
     ]
   ]
 
@@ -228,7 +228,7 @@
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[为什么想要随笔]
       #html.elem("p")[这个网站最初的一篇随笔。]
-      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/essays/2026-05-25-first/")[阅读随笔 →]]
+      #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/2026-05-25-first/")[阅读随笔 →]]
     ]
   ]
 ]

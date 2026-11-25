@@ -1,10 +1,10 @@
-#import "../../../config.typ": template, tufted
+#import "../index.typ": template, tufted
 
 #show: template.with(
   title: "实验小记",
 )
 
-#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/essays/"))[← 返回 Essays]
+#html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/blog/"))[← 返回 Blog]
 
 = 实验小记
 

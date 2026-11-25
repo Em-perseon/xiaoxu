@@ -33,17 +33,17 @@
 
       #html.elem("a", attrs: (href: "/xiaoxu/blog/"))[
         #html.elem("strong")[Blog]
-        #html.elem("span")[较完整的文章与专题写作]
-      ]
-
-      #html.elem("a", attrs: (href: "/xiaoxu/essays/"))[
-        #html.elem("strong")[Essays]
-        #html.elem("span")[日常观察与随笔]
+        #html.elem("span")[文章、专题写作与随笔]
       ]
 
       #html.elem("a", attrs: (href: "/xiaoxu/timeline/"))[
         #html.elem("strong")[Timeline]
         #html.elem("span")[网站内容的更新轨迹]
+      ]
+
+      #html.elem("a", attrs: (href: "/xiaoxu/cv/"))[
+        #html.elem("strong")[CV]
+        #html.elem("span")[个人经历与简介]
       ]
     ]
   ]

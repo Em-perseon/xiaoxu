@@ -5,7 +5,6 @@
     "/xiaoxu/": "Home",
     "/xiaoxu/docs/": "Docs",
     "/xiaoxu/blog/": "Blog",
-    "/xiaoxu/essays/": "Essays",
     "/xiaoxu/timeline/": "Timeline",
     "/xiaoxu/cv/": "CV",
   ),
