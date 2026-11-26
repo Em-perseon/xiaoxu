@@ -1,12 +1,12 @@
 #import "../index.typ": template, tufted
 
 #show: template.with(
-  title: "读论文",
+  title: "论文随看",
 )
 
 #html.elem("a", attrs: (class: "back-link", href: "/xiaoxu/blog/"))[← 返回 Blog]
 
-= 读论文
+= 论文随看
 
 一个放在 Blog 里的论文阅读合集，用来记录平时精读或粗读过的文章。
 

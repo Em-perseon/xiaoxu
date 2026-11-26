@@ -17,7 +17,7 @@
   #html.elem("a", attrs: (href: "2026-06-23-throatache/"))[#html.elem("span")[生病小记] #html.elem("b")[2026 · 06 · 23　→]]
   #html.elem("a", attrs: (href: "2026-06-01-experiment-notes/"))[#html.elem("span")[实验小记] #html.elem("b")[2026 · 06 · 01　→]]
   #html.elem("a", attrs: (href: "2026-05-25-first/"))[#html.elem("span")[为什么想要随笔] #html.elem("b")[2026 · 05 · 25　→]]
-  #html.elem("a", attrs: (href: "paper-reading/"))[#html.elem("span")[读论文] #html.elem("b")[专题　→]]
+  #html.elem("a", attrs: (href: "paper-reading/"))[#html.elem("span")[论文随看] #html.elem("b")[专题　→]]
   #html.elem("a", attrs: (href: "tinkering/"))[#html.elem("span")[瞎折腾] #html.elem("b")[专题　→]]
   #html.elem("a", attrs: (href: "backlog/"))[#html.elem("span")[补坑] #html.elem("b")[专题　→]]
 ]
