@@ -13,6 +13,7 @@
     #html.elem("time", attrs: (datetime: "2026-11-25"))[2026 · 11 · 25]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[初入 Design Science Research 有感]
+      #html.elem("p")[刚开始接触 DSR 的一点想法：聊了聊对“理论驱动设计”的改观，也顺带想了想 AI 时代该怎么找真正有价值的研究问题。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/first-steps-in-design-science-research/")[阅读文章 →]]
     ]
   ]
@@ -21,6 +22,7 @@
     #html.elem("time", attrs: (datetime: "2026-11-19"))[2026 · 11 · 19]
     #html.elem("div", attrs: (class: "timeline-content"))[
       #html.elem("h3")[做实验有感]
+      #html.elem("p")[不想再只把论文当故事会刷了，试着用 AI 把 Agent Harness 论文做成交互式 HTML 跑一遍，顺手记下一点关于工程与研究的随想。]
       #html.elem("p", attrs: (class: "timeline-link"))[#link("/xiaoxu/blog/inspiration-from-experiments/")[阅读文章 →]]
     ]
   ]
